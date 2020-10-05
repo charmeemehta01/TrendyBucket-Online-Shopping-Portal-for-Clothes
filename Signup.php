@@ -18,7 +18,7 @@
             ?>
                 <script type="text/javascript">
                     alert("Your cvv is : <?php echo $cvv?>");
-                    window.location.assign('index.html');
+                    window.location.assign('index.php');
                 </script>
             <?php
             }

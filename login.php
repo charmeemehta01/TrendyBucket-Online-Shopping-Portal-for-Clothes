@@ -21,7 +21,7 @@
                 $_SESSION["name"]=$row['Name'];
                 echo $row["Name"];
             }
-            header("location:index.html");
+            header("location:index.php");
         }
         else
             {
