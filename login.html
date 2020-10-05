@@ -54,7 +54,7 @@
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
             <a href="login.html">Login</a>
-            <a href="#">Register</a>
+            <a href="register.html">Register</a>
         </div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -91,8 +91,8 @@
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
+                            <a href="login.html">Login</a>
+                            <a href="register.html">Register</a>
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
@@ -116,11 +116,11 @@
                     <div class="contact__content">                        
                         <div class="contact__form">
                             <h5>LOGIN</h5>
-                            <h6>Enter your details below to continue</h6>
-                            <form action="#">
-                                <input type="email" placeholder="Email">
-                                <input type="password" placeholder="Password">                    
-                                <button type="submit" class="site-btn">SIGN IN</button>
+                            <h6>Enter your details below to continue</h6><br>
+                            <form action="login.php" method="POST">
+                                <input type="email" name="email" placeholder="Email">
+                                <input type="password" name="pwd" placeholder="Password">                    
+                                <button type="submit" name="submit" class="site-btn">SIGN IN</button>
                             </form>
                         </div>
                     </div>
