@@ -1,59 +1,3 @@
-<?php
-session_start();
-$con=mysqli_connect('localhost','root','','trendybucket');
-$msg='';
-if(isset($_POST['submit'])){
-    $time=time()-30;
-    $ip_address=getIpAddr();
-    $check_login_row=mysqli_fetch_assoc(mysqli_query($con,"select count(*) as total_count from login_log where try_time>$time and ip_address='$ip_address'"));
-    $total_count=$check_login_row['total_count'];
-    if($total_count==3){
-        $msg="To many failed login attempts. Please login after 30 sec";
-    }else{
-        $username=mysqli_real_escape_string($con,$_POST['email']);
-        $password=mysqli_real_escape_string($con,$_POST['pwd']);
-        $sql="SELECT * FROM user_details WHERE Email = '$username' and Password = '$password'";
-        $res=mysqli_query($con,$sql);
-        if(mysqli_num_rows($res)){
-            $_SESSION['IS_LOGIN']='yes';
-            mysqli_query($con,"delete from login_log where ip_address='$ip_address'");
-            $_SESSION["email"] = $username;
-            setcookie("email",$username);
-            while($row=mysqli_fetch_array($res))
-                {
-                    $_SESSION["name"]=$row['Name'];
-                }
-            ?>
-            <script>
-                window.location.href='index.php';
-            </script>
-            <?php
-        }else{
-            $total_count++;
-            $rem_attm=3-$total_count;
-            if($rem_attm==0){
-                $msg="To many failed login attempts. Please login after 30 sec";
-            }else{
-                $msg="Please enter valid login details.<br/>$rem_attm attempts remaining";
-            }
-            $try_time=time();
-            mysqli_query($con,"insert into login_log(ip_address,try_time) values('$ip_address','$try_time')");
-            
-        }
-    }
-}
-
-function getIpAddr(){
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])){
-       $ipAddr=$_SERVER['HTTP_CLIENT_IP'];
-    }elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-       $ipAddr=$_SERVER['HTTP_X_FORWARDED_FOR'];
-    }else{
-       $ipAddr=$_SERVER['REMOTE_ADDR'];
-    }
-   return $ipAddr;
-}
-?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -63,7 +7,7 @@ function getIpAddr(){
     <meta name="keywords" content="Ashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TrendyBucket - Login</title>
+    <title>TrendyBucket - Forgot Password</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
@@ -85,15 +29,61 @@ function getIpAddr(){
     margin-left: 390px;
     width: 70%;
     }
-    #result{color:red;}
     </style>
 </head>
 
 <body>
+
+<script type="text/javascript" language="javascript">
+        function validate() {
+            var string1 = document.getElementById("pwd").value;
+            var string2 = document.getElementById("rpwd").value;
+
+            if (string1 == string2) {
+                return true;
+            }
+            else {
+                alert("Passwords do not match");
+                return false;
+            }
+        }
+    </script>
+
+<?php
+session_start();
+$conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());  
+$successful='';
+if(isset($_POST['submit']))
+{
+    
+    $user_id = $_POST['user_id'];
+    $result = mysqli_query($conn,"SELECT * FROM user_details where Email='" . $_POST['user_id'] . "'");
+    $row = mysqli_fetch_assoc($result);
+	$fetch_user_id=$row['Email'];
+	$password=$row['Password'];
+	if($user_id==$fetch_user_id) {
+        $password=$_POST['pwd'];
+        $sql = "UPDATE user_details SET Password='".$password."' WHERE Email='" . $_POST['user_id'] . "'";
+        $result=mysqli_query($conn,$sql);
+        if ($conn->query($sql) === TRUE) {
+            $successful="Updated successfully";   
+          } else {
+            $successful="Error updating record: " . $conn->error;
+          }
+        
+    }		
+				else{
+					echo 'invalid userid';
+				}
+}
+?>
+
+
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
-    </div>
+    </div>     
 
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
@@ -167,28 +157,48 @@ function getIpAddr(){
     </header>
 
 <section class="contact spad">
-        <div class="container">
+<div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <div class="contact__content">                        
+                    <div class="contact__content">
                         <div class="contact__form">
-                            <h5>LOGIN</h5>
-                            <h6>Enter your details below to continue</h6><br>
-                            <form action="login.php" method="POST">
-                                <input type="email" name="email" placeholder="Email">
-                                <input type="password" name="pwd" placeholder="Password">
-                                <a href='forgot_pass.php'>Forgot password?</a>
-                                <br>
-                                <br>
-                                <button type="submit" name="submit" class="site-btn">SIGN IN</button>
-                                <div id="result"><?php echo $msg?></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                
-        </div>
-    </div>
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return validate()" method='post'>
+<table cellspacing='5' align='center'>
+    <h5>Forgot Password</h5>
+    <br>
+<tr>
+    <td>
+        User Email: <input type='text' placeholder="Enter User Email" name='user_id'/>
+        <br>
+        
+    </td>
+</tr>
+<tr>
+    <td>
+    Password:<br>
+    <input type="password" id="pwd" name="pwd" name="tracking-code"
+    id="tracking-code" autocomplete="off" placeholder="Enter Password"
+    required><br>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    Re-Enter Password:<br>
+    <input type="password" id="rpwd" name="rpwd" name="tracking-code"
+    id="tracking-code1" autocomplete="off" placeholder="Re-Enter Password"
+    required><br>
+    <span class="error"><?php echo $successful;?></span>
+    <br>
+    </td>
+    </tr>
+<tr><td>  <button type="Submit" name="submit" class="site-btn">Submit</button></td></tr>
+</table>
+</form>
+</div>
+</div>
+</div> 
+</div> 
+</div>
 </section>
 <!-- Footer Section Begin -->
 <footer class="footer">
@@ -231,23 +241,7 @@ function getIpAddr(){
                     </ul>
                 </div>
             </div>
-            <!--<div class="col-lg-4 col-md-8 col-sm-8">
-                <div class="footer__newslatter">
-                    <h6>NEWSLETTER</h6>
-                    <form action="#">
-                        <input type="text" placeholder="Email">
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
-                    <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>-->
+
     </div>
 </footer>
 <!-- Footer Section End -->
