@@ -14,19 +14,26 @@
         $sql = "SELECT * FROM user_details WHERE Email = '$username' and Password = '$password'";
         if ($result=mysqli_query($conn,$sql))
         {
-            session_start();
-            $_SESSION["email"] = $email;
-            while($row=mysqli_fetch_array($result))
+            if(mysqli_num_rows($result)==1)
             {
-                $_SESSION["name"]=$row['Name'];
-                echo $row["Name"];
-            }
+            session_start();
+            $_SESSION["email"] = $username;
+            setcookie("email",$username);
+            while($row=mysqli_fetch_array($result))
+                {
+                    $_SESSION["name"]=$row['Name'];
+                }
             header("location:index.php");
+            }
+            else
+            {
+                echo "User not found, Please head <a href='index.html'>here</a> and sign up";
+            }
         }
         else
             {
                 echo "Login failed...";
-                echo "Click  <a href='login.html'>here</a> to go back to signup page";
+                echo "Click  <a href='index.html'>here</a> to go to home page";
             }
 
         }
