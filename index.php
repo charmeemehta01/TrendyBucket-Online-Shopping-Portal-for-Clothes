@@ -7,6 +7,7 @@
     <meta name="keywords" content="Ashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <title>TrendyBucket - Home</title>
 
     <!-- Google Font -->
@@ -25,6 +26,22 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
+</head>
+<style type="text/css">
+    body {
+  background-color: white;
+  color: black;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+
+.fa-sun {
+    color: #f39c12;
+}
+</style>
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -54,6 +71,7 @@
     <!-- Header Section Begin -->
     <header class="header">
         <div class="container-fluid">
+
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
@@ -107,7 +125,16 @@
 
     <!-- Categories Section Begin -->
     <section class="categories">
+
         <div class="container-fluid">
+            <button onclick="myFunction()" style="font-size:24px; margin-left:98%;border-style: none;background-color: transparent;">
+                <i class="fas fa-sun"></i></button>
+            <script>
+            function myFunction() {
+               var element = document.body;
+               element.classList.toggle("dark-mode");
+            }
+            </script>
             <div class="row">
                 <div class="col-lg-6 p-0">
                     <div class="categories__item categories__large__item set-bg"
