@@ -29,7 +29,6 @@
     margin-left: 390px;
     width: 70%;
     }
-    #result{color:red;}
     </style>
 </head>
 
@@ -55,7 +54,7 @@
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
             <a href="login.html">Login</a>
-            <a href="register.html">Register</a>
+            <a href="register.php">Register</a>
         </div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -93,7 +92,7 @@
                     <div class="header__right">
                         <div class="header__right__auth">
                             <a href="login.html">Login</a>
-                            <a href="register.html">Register</a>
+                            <a href="register.php">Register</a>
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
@@ -111,7 +110,14 @@
     </header>
 
 <section class="contact spad">
-        <div class="container">
+        <div class="container" style="background-color: #FFFFFF;
+        -webkit-box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        padding-top: 30px;
+        padding-bottom: 30px;
+        ">
+      
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="contact__content">                        
@@ -120,17 +126,14 @@
                             <h6>Enter your details below to continue</h6><br>
                             <form action="login.php" method="POST">
                                 <input type="email" name="email" placeholder="Email">
-                                <input type="password" name="pwd" placeholder="Password">
-                                <a href='forgot.html'>Forgot password?</a>
-                                <br>
-                                <br>
-                                <button type="submit" name="submit" class="site-btn">SIGN IN</button>
-                                <div id="result"><?php echo $msg?></div>
+                                <input type="password" name="pwd" placeholder="Password">                    
+                                <a href="forgot_pass.html">Forgot Password?</a>
+                                <br><br>
+                                <button type="submit" name="submit" class="site-btn">LOGIN</button>
                             </form>
                         </div>
                     </div>
-                </div>
-                
+                </div>  
         </div>
     </div>
 </section>
@@ -175,23 +178,7 @@
                     </ul>
                 </div>
             </div>
-            <!--<div class="col-lg-4 col-md-8 col-sm-8">
-                <div class="footer__newslatter">
-                    <h6>NEWSLETTER</h6>
-                    <form action="#">
-                        <input type="text" placeholder="Email">
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
-                    <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>-->
+
     </div>
 </footer>
 <!-- Footer Section End -->
