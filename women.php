@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -10,7 +7,7 @@ session_start();
     <meta name="keywords" content="Ashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TrendyBucket - Men</title>
+    <title>TrendyBucket - Women</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
@@ -33,6 +30,7 @@ session_start();
     <div id="preloder">
         <div class="loader"></div>
     </div>
+
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
@@ -112,7 +110,7 @@ session_start();
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Men's</span>
+                        <span>Women's</span>
                     </div>
                 </div>
             </div>
@@ -134,16 +132,17 @@ session_start();
                                 <div class="accordion" id="accordionExample">
                                     <div class="card">
                                         <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseTwo">Men</a>
+                                            <a data-toggle="collapse" data-target="#collapseTwo">Women</a>
                                         </div>
                                         <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
                                                 <ul>
                                                     <li><a href="#">Shirts</a></li>
+                                                    <li><a href="#">T-shirts</a></li>
                                                     <li><a href="#">Jackets</a></li>
                                                     <li><a href="#">Trousers & Pants</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
+                                                    <li><a href="#">Dresses</a></li>
+                                                    <li><a href="#">Tops</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -209,9 +208,9 @@ session_start();
                                 <h4>Shop by color</h4>
                             </div>
                             <div class="size__list color__list">                            
-                                <label for="khakis">
-                                    Khaki
-                                    <input type="checkbox" id="khaki">
+                                <label for="mustards">
+                                    Mustard
+                                    <input type="checkbox" id="mustard">
                                     <span class="checkmark"></span>
                                 </label>
                                 <label for="greys">
@@ -224,14 +223,19 @@ session_start();
                                     <input type="checkbox" id="blue">
                                     <span class="checkmark"></span>
                                 </label>
-                                <label for="greens">
-                                    Green
-                                    <input type="checkbox" id="green">
+                                <label for="whites">
+                                    White
+                                    <input type="checkbox" id="white">
                                     <span class="checkmark"></span>
                                 </label>
-                                <label for="pink">
-                                    Pink
-                                    <input type="checkbox" id="pink">
+                                <label for="blacks">
+                                    Black
+                                    <input type="checkbox" id="black">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="maroons">
+                                    Maroon
+                                    <input type="checkbox" id="maroon">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -242,27 +246,22 @@ session_start();
                     <div class="row">
 <?php
     $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());
-    $sql = "SELECT * FROM product where gender= 'M' ORDER BY id ASC";
+    $sql = "SELECT * FROM product where gender='F' ORDER BY id ASC";
     $product_array = mysqli_query($conn, $sql);
         
     //if (!empty($product_array)) { 
         //if (mysqli_num_rows($product_array)>0) {
                 while($row = mysqli_fetch_assoc($product_array)) {
                     ?>
+
                         <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
+                          <div class="product__item sale">
                                 <div class="product__item__pic set-bg" data-setbg="<?php echo $row["image"]; ?>">
-                                    
+                                    <!--<div class="label">Sale</div>-->
                                     <ul class="product__hover">
-                                    <li><a href="<?php echo $row["image"]; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>"><span class="icon_bag_alt"></span></a></li>
-                                    
-                                    <!-- <form method="post" name="add_cart" id="add_cart_form" action="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>"> -->
-                                        <!-- <li><span onclick="add_cart()" class="icon_bag_alt"></span></li>
-                                        <li><span class="icon_bag_alt"></span></li> -->
-                                    <!-- </form> -->
+                                        <li><a href="<?php echo $row["image"]; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
-                                    
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#"><?php echo $row["name"]; ?></a></h6>
@@ -272,29 +271,23 @@ session_start();
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
-                                    </div>
+                                    </div>                                    
                                     <div class="product__price">₹<?php echo $row["price"]; ?></div>
-                                </div>                            
+                                </div>
                             </div>
                         </div>
-                    <?php }  ?>
-                        <script>
-                            function add_cart() {
-                                var x = document.getElementById('add_cart_form').value;
-                                x[0].submit();
-                            }
-                        </script>
 
-                        <!-- <div class="col-lg-4 col-md-6">
+                    <?php }  ?>
+                        <!--<div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-2.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="img/women/shop-2.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/men/shop-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/women/shop-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Polo T-shirt with Signature Branding</a></h6>
+                                    <h6><a href="#">High-Rise Mustard Culottes</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -302,19 +295,19 @@ session_start();
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="product__price">₹   499.0</div>
+                                    <div class="product__price">₹   1799.0</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-3.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="img/women/shop-3.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/men/shop-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li><li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                        <li><a href="img/women/shop-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li><li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Washed Slim Fit Jeans</a></h6>
+                                    <h6><a href="#">Zip-Front Hoodie with Insert Pockets</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -322,20 +315,20 @@ session_start();
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="product__price">₹   1899.0</div>
+                                    <div class="product__price">₹   1599.0</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-4.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="img/women/shop-4.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/men/shop-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/women/shop-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Slim Fit Chinos with Insert Pockets</a></h6>
+                                    <h6><a href="#">High-Rise Black Culottes</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -343,21 +336,21 @@ session_start();
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="product__price">₹   1899.0</div>
+                                    <div class="product__price">₹   1799.0</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-5.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="img/women/shop-5.jpg">
                                     <div class="label">Sale</div>
                                     <ul class="product__hover">
-                                        <li><a href="img/men/shop-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/women/shop-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Denim Jacket with Fleece Collar</a></h6>
+                                    <h6><a href="#">Balloon Sleeves Grey Shirt</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -365,20 +358,20 @@ session_start();
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="product__price">₹   4899.0<span>₹   6999.0</span></div>
+                                    <div class="product__price">₹   1599.0<span>₹   699.0</span></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-6.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="img/women/shop-6.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/men/shop-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/women/shop-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Slim Fit Shirt with Patch Pocket</a></h6>
+                                    <h6><a href="#">Leather Zip-Front Biker Jacket</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -386,20 +379,20 @@ session_start();
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="product__price">₹   999.0</div>
+                                    <div class="product__price">₹   9999.0</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-7.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="img/women/shop-7.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/men/shop-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/women/shop-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Polo T-shirt with Vented Hem</a></h6>
+                                    <h6><a href="#">Scoop-Neck Top with Criss-Cross Neckline</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -407,20 +400,20 @@ session_start();
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="product__price">₹   3799.0</div>
+                                    <div class="product__price">₹   3999.0</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-8.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="img/women/shop-8.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/men/shop-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/women/shop-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Flat-Front Trousers with Insert Pockets</a></h6>
+                                    <h6><a href="#">Wrap Dress with Belted Waist</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -428,21 +421,21 @@ session_start();
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="product__price">₹   1699.0</div>
+                                    <div class="product__price">₹   7699.0</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-9.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="img/women/shop-9.jpg">
                                     <div class="label">Sale</div>
                                     <ul class="product__hover">
-                                        <li><a href="img/men/shop-9.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/women/shop-9.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Zip-Front Hoodie</a></h6>
+                                    <h6><a href="#">Strappy T-shirt with Scoop Neck</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -450,10 +443,10 @@ session_start();
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="product__price">₹   2999.0 <span>₹   5999.0</span></div>
-                                </div> -->
+                                    <div class="product__price">₹   2999.0 <span>₹   3999.0</span></div>
+                                </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>

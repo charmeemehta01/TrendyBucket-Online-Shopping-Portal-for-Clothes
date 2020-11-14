@@ -42,7 +42,7 @@
     color: #f39c12;
 }
 </style>
-<body>
+<body class="dark-mode">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>

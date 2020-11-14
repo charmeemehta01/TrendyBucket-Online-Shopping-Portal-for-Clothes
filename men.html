@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -238,16 +241,24 @@
                 </div>
                 <div class="col-lg-9 col-md-9">
                     <div class="row">
+<?php
+    $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());
+    $sql = ("SELECT * FROM menproduct ORDER BY id ASC" or die(mysqli_error($conn)));
+    $product_array = mysqli_query($conn, $sql);
+
+    if (!empty($product_array)) { 
+                foreach($product_array as $key=>$value){
+                    ?>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-1.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="<?php echo $product_array[$key]["image"]; ?>">
                                     <ul class="product__hover">
-                                        <li><a href="img/men/shop-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                        <form method="post" id="add_cart_form"action="shop-cart.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>">
+                                        <li><span onclick="add_cart()" class="icon_bag_alt"></span></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Mandarin Collar Slim Fit Shirt</a></h6>
+                                    <h6><a href="#"><?php echo $product_array[$key]["name"]; ?></a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -255,10 +266,18 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="product__price">₹   1499.0</div>
+                                    <div class="product__price">₹<?php echo "$".$product_array[$key]["price"]; ?></div>
                                 </div>
                             </div>
                         </div>
+                    <?php } ?>
+                        <script>
+                            function add_cart() {
+                                var x = document.getElementById('add_cart_form').value;
+                                x[0].submit();
+                            }
+                        </script>
+
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="img/men/shop-2.jpg">
