@@ -1,21 +1,24 @@
 <?php
 session_start();
-if(!empty($_GET["action"])) {
-switch($_GET["action"]) {
-	case "add":
-		/*if(!empty($_POST["quantity"])) {*/
+if(!empty($_GET["action"])) {   
+switch($_GET["action"]) {    
+	case "add":              
+        $str = $_GET["code"].'_quantity';  
+        echo $_POST; 
+		if(!empty($_POST[$str])) {
             $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());                
-			$productByCode =mysqli_query($conn,"SELECT * FROM product WHERE code='" . $_GET["code"] . "'");
-			$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>"1", 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
+			$res =mysqli_query($conn,"SELECT * FROM product WHERE code='" . $_GET["code"] . "'");
+            $productByCode = mysqli_fetch_assoc($res);
+			$itemArray = array($productByCode["code"]=>array('name'=>$productByCode["name"], 'code'=>$productByCode["code"], 'quantity'=>1, 'price'=>$productByCode["price"], 'image'=>$productByCode["image"]));
 			
 			if(!empty($_SESSION["cart_item"])) {
-				if(in_array($productByCode[0]["code"],array_keys($_SESSION["cart_item"]))) {
+				if(in_array($productByCode["code"],array_keys($_SESSION["cart_item"]))) {
 					foreach($_SESSION["cart_item"] as $k => $v) {
-							if($productByCode[0]["code"] == $k) {
+							if($productByCode["code"] == $k) {
 								if(empty($_SESSION["cart_item"][$k]["quantity"])) {
 									$_SESSION["cart_item"][$k]["quantity"] = 0;
 								}
-								$_SESSION["cart_item"][$k]["quantity"] += "1";
+								//$_SESSION["cart_item"][$k]["quantity"] += 1;
 							}
 					}
 				} else {
@@ -25,7 +28,7 @@ switch($_GET["action"]) {
              else {
 				$_SESSION["cart_item"] = $itemArray;
 			}
-		/*}*/
+		}
 	break;
 	case "remove":
 		if(!empty($_SESSION["cart_item"])) {
@@ -185,20 +188,24 @@ switch($_GET["action"]) {
                             </thead>
                             <tbody>
                             <?php
-                            $_SESSION["total_price"]=0;
-                            $_SESSION["total_quantity"]=0;
+                            //$_SESSION["total_price"]=0;
+                            //$_SESSION["total_quantity"]=0;
                             if(isset($_SESSION["cart_item"]))
                             {
                             foreach ($_SESSION["cart_item"] as $item){
                                 $item_price = $item["quantity"]*$item["price"];
+                                $total_quantity = 0;
                                 $total_quantity += $item["quantity"];
                                 $_SESSION["total_quantity"]=$total_quantity;
+                                $total_price = 0;
                                 $total_price += ($item["price"]*$item["quantity"]);
                                 $_SESSION["total_price"]=$total_price;
+                                        session_write_close();
+
                                 ?>
                                 <tr>
                                     <td class="cart__product__item">
-                                        <img src="<?php echo $item["image"];?>" alt="">
+                                        <img src="<?php echo $item["image"];?>" style="max-width: 100px; max-height: 100px;" alt="">
                                         <div class="cart__product__item__title">
                                             <h6><?php echo $item["name"];?></h6>
                                             <div class="rating">
@@ -213,7 +220,7 @@ switch($_GET["action"]) {
                                     <td class="cart__price"><?php echo $item["price"];?></td>
                                     <td class="cart__quantity">
                                         <div class="pro-qty">
-                                            <input type="text" value="<?php echo $item["quantity"];?>">
+                                            <input type="text" onchange="tp()" value="<?php echo $item["quantity"];?>">
                                         </div>
                                     </td>
                                     <td class="cart__total"><?php echo $total_price;?></td>

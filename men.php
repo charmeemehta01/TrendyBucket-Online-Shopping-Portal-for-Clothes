@@ -252,15 +252,11 @@ session_start();
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<?php echo $row["image"]; ?>">
-                                    
+                                    <form method="POST" action="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>"> 
                                     <ul class="product__hover">
                                     <li><a href="<?php echo $row["image"]; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>"><span class="icon_bag_alt"></span></a></li>
-                                    
-                                    <!-- <form method="post" name="add_cart" id="add_cart_form" action="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>"> -->
-                                        <!-- <li><span onclick="add_cart()" class="icon_bag_alt"></span></li>
-                                        <li><span class="icon_bag_alt"></span></li> -->
-                                    <!-- </form> -->
+                                        <li><a href=""><span class="icon_bag_alt"></span><input type="submit"/></a></li>
+                                                                       
                                     </ul>
                                     
                                 </div>
@@ -274,7 +270,11 @@ session_start();
                                         <i class="fa fa-star"></i>
                                     </div>
                                     <div class="product__price">₹<?php echo $row["price"]; ?></div>
-                                </div>                            
+                                    <div class="pro-qty">
+                                        <input type="text" id="<?php echo $row["code"]; ?>_quantity" value="1">
+                                    </div>
+                                </div>  
+                                </form>                          
                             </div>
                         </div>
                     <?php }  ?>
@@ -282,7 +282,7 @@ session_start();
                             function add_cart() {
                                 var x = document.getElementById('add_cart_form').value;
                                 x[0].submit();
-                            }
+                            }function func(e) {console.log(e.target.value);}
                         </script>
 
                         <!-- <div class="col-lg-4 col-md-6">
