@@ -82,9 +82,8 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
+                            <li><a href="women.php">Women’s</a></li>
+                            <li><a href="men.php">Men’s</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
@@ -133,6 +132,7 @@
             function myFunction() {
                var element = document.body;
                element.classList.toggle("dark-mode");
+               document.getElementBy
             }
             </script>
             <div class="row">
@@ -378,22 +378,6 @@
                     </ul>
                 </div>
             </div>
-            <!--<div class="col-lg-4 col-md-8 col-sm-8">
-                <div class="footer__newslatter">
-                    <h6>NEWSLETTER</h6>
-                    <form action="#">
-                        <input type="text" placeholder="Email">
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
-                    <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>-->
         </div>
     </div>
 </footer>

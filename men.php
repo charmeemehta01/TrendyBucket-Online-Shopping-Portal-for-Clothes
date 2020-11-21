@@ -26,6 +26,7 @@ session_start();
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
 </head>
 
 <body>
@@ -156,7 +157,7 @@ session_start();
                             </div>
                             <div class="filter-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="99"></div>
+                                data-min="499" data-max="4899"></div>
                                 <div class="range-slider">
                                     <div class="price-input">
                                         <p>Price:</p>
@@ -253,10 +254,10 @@ session_start();
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<?php echo $row["image"]; ?>">
                                     <form method="POST" action="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>"> 
-                                    <ul class="product__hover">
+                                    <ul class="product__hover" style="margin-left: 0%;">
                                     <li><a href="<?php echo $row["image"]; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href=""><span class="icon_bag_alt"></span><input type="submit"/></a></li>
-                                                                       
+                                        <li>
+                                            <a href=""><input type="submit" value="Add to Cart" style="border-radius: 10px; background-color: white; border:0px" /></a></li>
                                     </ul>
                                     
                                 </div>
@@ -271,7 +272,7 @@ session_start();
                                     </div>
                                     <div class="product__price">₹<?php echo $row["price"]; ?></div>
                                     <div class="pro-qty">
-                                        <input type="text" id="<?php echo $row["code"]; ?>_quantity" value="1">
+                                        <input type="text" name="<?php echo $row["code"]; ?>_quantity" value="1">
                                     </div>
                                 </div>  
                                 </form>                          
@@ -284,174 +285,6 @@ session_start();
                                 x[0].submit();
                             }function func(e) {console.log(e.target.value);}
                         </script>
-
-                        <!-- <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-2.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/men/shop-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Polo T-shirt with Signature Branding</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">₹   499.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-3.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/men/shop-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li><li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Washed Slim Fit Jeans</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">₹   1899.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-4.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/men/shop-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Slim Fit Chinos with Insert Pockets</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">₹   1899.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-5.jpg">
-                                    <div class="label">Sale</div>
-                                    <ul class="product__hover">
-                                        <li><a href="img/men/shop-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Denim Jacket with Fleece Collar</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">₹   4899.0<span>₹   6999.0</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-6.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/men/shop-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Slim Fit Shirt with Patch Pocket</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">₹   999.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-7.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/men/shop-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Polo T-shirt with Vented Hem</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">₹   3799.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-8.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/men/shop-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Flat-Front Trousers with Insert Pockets</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">₹   1699.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="img/men/shop-9.jpg">
-                                    <div class="label">Sale</div>
-                                    <ul class="product__hover">
-                                        <li><a href="img/men/shop-9.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Zip-Front Hoodie</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">₹   2999.0 <span>₹   5999.0</span></div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -501,27 +334,10 @@ session_start();
                         </ul>
                     </div>
                 </div>
-                <!--<div class="col-lg-4 col-md-8 col-sm-8">
-                    <div class="footer__newslatter">
-                        <h6>NEWSLETTER</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Email">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </footer>
     <!-- Footer Section End -->
-
     <!-- Search Begin -->
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
