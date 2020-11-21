@@ -55,17 +55,30 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 // Load Composer's autoloader
-require 'vendor/autoload.php';
 require 'vendor/phpmailer/src/Exception.php';
 require 'vendor/phpmailer/src/PHPMailer.php';
 require 'vendor/phpmailer/src/SMTP.php';
 
 // Instantiation and passing `true` enables exceptions
 $mail = new PHPMailer(true);
-$user_id = $_POST['user_id'];
+$msg='';
+try{
+if($_SERVER["REQUEST_METHOD"]=="POST")
+    {
 if(isset($_POST['submit']))
 {
-try {
+$mysqli=new mysqli('localhost','root','','trendybucket');
+if ($mysqli->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+} 
+$user_id = $_POST['user_id'];
+$stmt = $mysqli->prepare("SELECT Email FROM user_details WHERE Email = ? LIMIT 1");
+$stmt->bind_param('s',$user_id);
+$stmt->execute();
+$stmt->bind_result($user_id);
+$stmt->store_result();
+if($stmt->num_rows == 1)
+{
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP
@@ -78,6 +91,7 @@ try {
 
     //Recipients
     $mail->setFrom('trendybucketmailer@gmail.com', 'Trendy Bucket Mailer');
+    $mail->SMTPDebug = false;
     $mail->addAddress($user_id, 'Joe User');     // Add a recipient
     $mail->addReplyTo('no-reply@gmail.com', 'No-REPLY');
 
@@ -87,12 +101,28 @@ try {
     $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error";
+    if(!$mail->send())
+    {
+        $msg="Message could not be sent. Mailer Error";
+    }
+    else{
+        $msg='Message has been sent';
+    } 
+
+}
+else
+    {
+        $msg="User doesn't exist";
+    }
+    }
+    
 }
 }
+catch (phpmailerException $e) {
+    echo $e->errorMessage(); //Pretty error messages from PHPMailer
+  } catch (Exception $e) {
+    echo $e->getMessage(); //Boring error messages from anything else!
+  }
 ?>
 
     <!-- Page Preloder -->
@@ -133,9 +163,9 @@ try {
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
+                            <li class="active"><a href="./index.php">Home</a></li>
+                            <li><a href="women.php">Women’s</a></li>
+                            <li><a href="men.php">Men’s</a></li>
                             <li><a href="./shop.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
@@ -187,6 +217,12 @@ try {
         
     </td>
 </tr>
+<tr>
+    <td>
+    <div id="result"><?php echo $msg?></div>
+</td>
+</tr>
+<br>
 <tr><td>  <button type="Submit" name="submit" class="site-btn">Submit</button></td></tr>
 </table>
 </form>
