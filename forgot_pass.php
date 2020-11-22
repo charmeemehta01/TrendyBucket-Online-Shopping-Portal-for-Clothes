@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -34,21 +35,6 @@
 
 <body>
 
-<script type="text/javascript" language="javascript">
-        function validate() {
-            var string1 = document.getElementById("pwd").value;
-            var string2 = document.getElementById("rpwd").value;
-
-            if (string1 == string2) {
-                return true;
-            }
-            else {
-                alert("Passwords do not match");
-                return false;
-            }
-        }
-    </script>
-
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -72,7 +58,8 @@ if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 } 
 $user_id = $_POST['user_id'];
-$stmt = $mysqli->prepare("SELECT Email FROM user_details WHERE Email = ? LIMIT 1");
+$query="SELECT Email FROM user_details WHERE Email = ? LIMIT 1";
+$stmt = $mysqli->prepare($query);
 $stmt->bind_param('s',$user_id);
 $stmt->execute();
 $stmt->bind_result($user_id);
@@ -95,10 +82,11 @@ if($stmt->num_rows == 1)
     $mail->addAddress($user_id, 'Joe User');     // Add a recipient
     $mail->addReplyTo('no-reply@gmail.com', 'No-REPLY');
 
+    $link='http://localhost/TrendyBucket-Online-Shopping-Portal-for-Clothes-master/reset_pass.php';
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->Subject = 'Password Reset Request';
+    $mail->Body    = '<h3><b>Hello User,</b></h3><br>You have requested for your password recovery.To reset your password click the following link '.$link;
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     if(!$mail->send())
@@ -115,7 +103,6 @@ else
         $msg="User doesn't exist";
     }
     }
-    
 }
 }
 catch (phpmailerException $e) {
@@ -213,8 +200,7 @@ catch (phpmailerException $e) {
 <tr>
     <td>
         User Email: <input type='text' placeholder="Enter User Email" name='user_id'/>
-        <br>
-        
+        <br>   
     </td>
 </tr>
 <tr>
@@ -222,7 +208,7 @@ catch (phpmailerException $e) {
     <div id="result"><?php echo $msg?></div>
 </td>
 </tr>
-<br>
+
 <tr><td>  <button type="Submit" name="submit" class="site-btn">Submit</button></td></tr>
 </table>
 </form>
