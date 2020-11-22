@@ -26,6 +26,7 @@ session_start();
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    
 
 </head>
 
@@ -45,7 +46,7 @@ session_start();
             </a></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+            <a href="./index.php"><img src="img/logo1.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
@@ -61,16 +62,16 @@ session_start();
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                      <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                      <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li class="active"><a href="./shop.html">Shop</a></li>
+                            <li><a href="./index.php">Home</a></li>
+                            <li><a href="women.php">Women’s</a></li>
+                            <li class="active"><a href="men.php">Men’s</a></li>
+                            <li><a href="./shop.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
@@ -112,7 +113,7 @@ session_start();
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="./index.php"><i class="fa fa-home"></i> Home</a>
                         <span>Men's</span>
                     </div>
                 </div>
@@ -257,7 +258,7 @@ session_start();
                                     <ul class="product__hover" style="margin-left: 0%;">
                                     <li><a href="<?php echo $row["image"]; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li>
-                                            <a href=""><input type="submit" value="Add to Cart" style="border-radius: 10px; background-color: white; border:0px" /></a></li>
+                                            <a href=""><input type="submit" id="atc" value="Add to Cart" style="border-radius: 10px; background-color:  #ca1515; border:0px; " /></a></li>
                                     </ul>
                                     
                                 </div>
@@ -300,7 +301,7 @@ session_start();
                 <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                        <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                        <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                         </div>
                         <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
                         <div class="footer__payment">
