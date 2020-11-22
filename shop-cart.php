@@ -22,7 +22,10 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="dark.css" media="(prefers-color-scheme:dark)">
+    <link rel="stylesheet" href="light.css" media="(prefers-color-scheme:no-preference),(prefers-color-scheme:light)">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="module" src="https://unpkg.com/dark-mode-toggle"></script>
 </head>
 <body>
 
@@ -94,7 +97,7 @@ switch($_GET["action"]) {
 }
 }
 ?>
-
+    <div>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -123,8 +126,8 @@ switch($_GET["action"]) {
         </div>
     </div>
     <!-- Offcanvas Menu End -->
-
     <!-- Header Section Begin -->
+    <div>
     <header class="header">
         <div class="container-fluid">
             <div class="row">
@@ -166,6 +169,7 @@ switch($_GET["action"]) {
             </div>
         </div>
     </header>
+</div>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Begin -->
@@ -179,19 +183,30 @@ switch($_GET["action"]) {
                     </div>
                 </div>
             </div>
+            <dark-mode-toggle
+    id="dark-mode-toggle-1"
+    appearance="toggle"
+    dark="Dark"
+    light="Light"
+    remember="Remember this" style="max-width: 200px;font-size: 10px"></dark-mode-toggle>
         </div>
     </div>
+
     <!-- Breadcrumb End -->
 
     <!-- Shop Cart Section Begin -->
+
     <section class="shop-cart spad">
         <div class="container">
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shop__cart__table">
                         <table>
                             <thead>
                                 <tr>
+
+
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
@@ -255,7 +270,7 @@ switch($_GET["action"]) {
             <div class="row">
                 <div class="col-lg-6">
                     <div class="discount__content">
-                        <h6>Discount codes</h6>
+                        <div style="color:white"><h6>Discount codes</h6></div>
                         <form action="shop-cart.php?action=promo">
                             <input type="hidden" name="action" value="promo"/>
                             <input type="text" name="promo" placeholder="Enter your coupon code">
@@ -338,6 +353,7 @@ switch($_GET["action"]) {
             </form>
         </div>
     </div>
+</div>
     <!-- Search End -->
     <!-- Discount -->
     <script>
@@ -376,6 +392,7 @@ switch($_GET["action"]) {
         location.reload();
     });
 </script>
+
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
