@@ -152,10 +152,6 @@ session_start();
                             </div>
                             <div class="col-lg-12">
                                 <div class="checkout__form__input">
-                                    <p>Country <span>*</span></p>
-                                    <input type="text" value="India">
-                                </div>
-                                <div class="checkout__form__input">
                                     <p>Address <span>*</span></p>                                   
                                     <input type="text" placeholder="Apartment. suite, unite ect ( optinal )" value="<?php echo $user_details['Address']; ?>">
                                 </div>
@@ -164,18 +160,22 @@ session_start();
                                     <input type="text" value="<?php echo $user_details['City']; ?>">
                                 </div>
                                 <div class="checkout__form__input">
-                                    <p>Country/State <span>*</span></p>
+                                    <p>State <span>*</span></p>
                                     <input type="text" value="<?php echo $user_details['State']; ?>">
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Postcode/Zip <span>*</span></p>
                                     <input type="text">
                                 </div>
+                                <div class="checkout__form__input">
+                                    <p>Country <span>*</span></p>
+                                    <input type="text" value="India">
+                                </div>                                
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Phone <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" value="<?php echo $user_details['MobileNo']; ?>">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">

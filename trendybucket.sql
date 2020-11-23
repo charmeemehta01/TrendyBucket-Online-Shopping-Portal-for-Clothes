@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2020 at 02:23 PM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 7.2.5
+-- Generation Time: Nov 23, 2020 at 09:22 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -57,8 +56,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `code`, `image`, `price`, `quantity`, `ref`, `tags`, `gender`) VALUES
-(1, 'Mandarin Collar Slim Fit Shirt', '1000', 'img/men/shop-1.jpg', 1499.00, 9, 'shop-1.jpg', 'Mandarin Collar Slim Fit Shirt', 'M'),
-(2, 'Polo T-shirt with Signature Branding', '1001', 'img/men/shop-2.jpg', 499.00, 6, 'shop-2.jpg', 'Polo T-shirt with Signature Branding', 'M'),
+(1, 'Mandarin Collar Slim Fit Shirt', '1000', 'img/men/shop-1.jpg', 1499.00, -58, 'shop-1.jpg', 'Mandarin Collar Slim Fit Shirt', 'M'),
+(2, 'Polo T-shirt with Signature Branding', '1001', 'img/men/shop-2.jpg', 499.00, -1, 'shop-2.jpg', 'Polo T-shirt with Signature Branding', 'M'),
 (3, 'Washed Slim Fit Jeans', '1002', 'img/men/shop-3.jpg', 1899.00, 20, 'shop-3.jpg', 'Washed Slim Fit Jeans', 'M'),
 (4, 'Slim Fit Chinos with Insert Pockets', '1003', 'img/men/shop-4.jpg', 1899.00, 20, 'shop-4.jpg', 'Slim Fit Chinos with Insert Pockets', 'M'),
 (5, 'Denim Jacket with Fleece Collar', '1004', 'img/men/shop-5.jpg', 4899.00, 15, 'shop-5.jpg', 'Denim Jacket with Fleece Collar', 'M'),
@@ -85,22 +84,26 @@ INSERT INTO `product` (`id`, `name`, `code`, `image`, `price`, `quantity`, `ref`
 CREATE TABLE `user_details` (
   `id` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
+  `FirstName` text NOT NULL,
+  `LastName` text NOT NULL,
   `Email` varchar(30) NOT NULL,
+  `MobileNo` text NOT NULL,
   `Account_Bal` int(30) NOT NULL,
   `Password` varchar(50) NOT NULL,
   `CVV` int(4) NOT NULL,
-  `Address` text NOT NULL
+  `Address` text NOT NULL,
+  `City` text NOT NULL,
+  `State` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_details`
 --
 
-INSERT INTO `user_details` (`id`, `Name`, `Email`, `Account_Bal`, `Password`, `CVV`, `Address`) VALUES
-(1, 'IamUtsavP', 'parekhutsav13@gmail.com', 10000, '12', 5663, 'New Ratan Apartment, S.v.road Borivali West.\\r\\n23'),
-(2, 'CharmeeM', 'charmee.m@somaiya.edu', 10000, 'charmeeuser', 3003, 'Borivali West'),
-(3, 'TestUser', 'test123@gmail.com', 10000, 'testUser', 8105, 'Borivali West'),
-(4, 'Utsav132', 'utsav.parekh@somaiya.edu', 10000, '123', 2338, 'New Ratan Apartment, S.v.road Borivali West.\\r\\n23');
+INSERT INTO `user_details` (`id`, `Name`, `FirstName`, `LastName`, `Email`, `MobileNo`, `Account_Bal`, `Password`, `CVV`, `Address`, `City`, `State`) VALUES
+(2, 'CharmeeM', '', '', 'charmee.m@somaiya.edu', '', 10000, 'charmeeuser', 3003, 'Borivali West', '', ''),
+(3, 'TestUser', '', '', 'test123@gmail.com', '', 10000, 'testUser', 8105, 'Borivali West', '', ''),
+(7, 'IamUtsavP', 'Utsav', 'Parekh', 'parekhutsav13@gmail.com', '09004525005', 10000, '12', 3697, '23, New Ratan Apt,Naatakwala Extension Road,Next to Bank of India, Borivali West', 'Mumbai', 'Maharashtra');
 
 --
 -- Indexes for dumped tables
@@ -132,7 +135,7 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT for table `login_log`
 --
 ALTER TABLE `login_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -144,7 +147,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
