@@ -80,10 +80,18 @@ function getIpAddr(){
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <style type="text/css">
+     .imageclass{
+            margin-top: 0px;
+            float: left;
+        }
         .contact__content {
-    text-align: center;
-    margin-left: 390px;
-    width: 70%;
+            text-align: center;
+            margin-left: 650px;
+            width: 85%;
+            margin-top:55px;
+            box-shadow: 2px 2px 2px 2px;
+            display:block;
+            padding: 40px;
     }
     #result{color:red;}
     </style>
@@ -170,6 +178,9 @@ function getIpAddr(){
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
+                <div class="imageclass">
+                        <img src="./img/login.jpg"/>
+                        </div>
                     <div class="contact__content">                        
                         <div class="contact__form">
                             <h5>LOGIN</h5>

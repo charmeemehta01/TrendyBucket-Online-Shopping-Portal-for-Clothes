@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -46,8 +50,12 @@
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+        <?php
+        if (isset($_SESSION['name']))
+        {
+            print "Welcome, ".$_SESSION['name'];
+        }
+        ?>
         </div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -64,10 +72,9 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li class="active"><a href="./shop.html">Shop</a></li>
+                            <li><a href="./index.php">Home</a></li>
+                            <li class="active"><a href="women.php">Women’s</a></li>
+                            <li><a href="men.php">Men’s</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
@@ -84,8 +91,12 @@
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
+                        <?php
+        if (isset($_SESSION['name']))
+        {
+            print "Welcome, ".$_SESSION['name'];
+        }
+        ?>
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
@@ -519,8 +530,8 @@
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
+            <form class="search-model-form" action="search-result.php" method="POST">
+                <input type="text" id="search-input" placeholder="Search here....." name='search-input'>
             </form>
         </div>
     </div>

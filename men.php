@@ -50,8 +50,12 @@ session_start();
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+       <?php
+        if (isset($_SESSION['name']))
+        {
+            print "Welcome, ".$_SESSION['name'];
+        }
+        ?>
         </div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -71,7 +75,8 @@ session_start();
                             <li><a href="./index.php">Home</a></li>
                             <li><a href="women.php">Women’s</a></li>
                             <li class="active"><a href="men.php">Men’s</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
+                            
+                            
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
@@ -88,8 +93,12 @@ session_start();
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
+                        <?php
+        if (isset($_SESSION['name']))
+        {
+            print "Welcome, ".$_SESSION['name'];
+        }
+        ?>
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
@@ -247,8 +256,7 @@ session_start();
     $sql = "SELECT * FROM product where gender= 'M' ORDER BY id ASC";
     $product_array = mysqli_query($conn, $sql);
         
-    //if (!empty($product_array)) { 
-        //if (mysqli_num_rows($product_array)>0) {
+   
                 while($row = mysqli_fetch_assoc($product_array)) {
                     ?>
                         <div class="col-lg-4 col-md-6">
@@ -256,9 +264,9 @@ session_start();
                                 <div class="product__item__pic set-bg" data-setbg="<?php echo $row["image"]; ?>">
                                     <form method="POST" action="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>"> 
                                     <ul class="product__hover" style="margin-left: 0%;">
-                                    <li><a href="<?php echo $row["image"]; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                    <li ><a href="<?php echo $row["image"]; ?>" style="background:#ca1515;" class="image-popup"><span class="arrow_expand" style="color:white;"></span></a></li>
                                         <li>
-                                            <a href=""><input type="submit" id="atc" value="Add to Cart" style="border-radius: 10px; background-color:  #ca1515; border:0px; " /></a></li>
+                                            <a href=""><input type="submit" id="atc" value="Add to Cart" style="border-radius: 8px; background-color:  #ca1515; border:0px; color:white; " /></a></li>
                                     </ul>
                                     
                                 </div>

@@ -26,6 +26,12 @@
     <link rel="stylesheet" href="light.css" media="(prefers-color-scheme:no-preference),(prefers-color-scheme:light)">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <script type="module" src="https://unpkg.com/dark-mode-toggle"></script>
+    <style type="text/css">
+    .quantity
+    {
+        margin-left:50px;   
+    }
+    </style>
 </head>
 <body>
 
@@ -117,12 +123,11 @@ switch($_GET["action"]) {
             </a></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+            <a href="./index.php"><img src="img/logo1.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+            
         </div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -133,13 +138,13 @@ switch($_GET["action"]) {
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                        <a href="./ php"><img src="img/logo1.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li><a href="./index.php">Home</a></li>
                             <li><a href="women.php">Women’s</a></li>
                             <li><a href="men.php">Men’s</a></li>
                             <li><a href="#">Pages</a>
@@ -158,8 +163,7 @@ switch($_GET["action"]) {
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="login.html">Login</a>
-                            <a href="register.php">Register</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -178,7 +182,7 @@ switch($_GET["action"]) {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="./index.php"><i class="fa fa-home"></i> Home</a>
                         <span>Shopping cart</span>
                     </div>
                 </div>
@@ -245,13 +249,13 @@ switch($_GET["action"]) {
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="cart__price"><?php echo $item["price"];?></td>
+                                    <td class="cart__price">₹<?php echo $item["price"];?></td>
                                     <td class="cart__quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="<?php echo $item["quantity"];?>">
+                                        <div class="quantity">
+                                            <?php echo $item["quantity"];?>
                                         </div>
                                     </td>
-                                    <td class="cart__total"><?php echo $total_price;?></td>
+                                    <td class="cart__total">₹<?php echo $total_price;?></td>
                                     <td class="cart__close" onclick="window.location.href = 'shop-cart.php?action=remove&code=<?php echo $item['code']?>'"><span class="icon_close" ></span></td>
                                 
                                     </tr>  <?php }} ?>                              
@@ -282,14 +286,14 @@ switch($_GET["action"]) {
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span><?php echo $cart_price; ?></span></li>
+                            <li>Subtotal <span>₹<?php echo $cart_price; ?></span></li>
                              <?php if($_SESSION['code_value'] > 0) { ?>                            
-                                <li>Discount <span>-<?php echo $_SESSION['code_value']; ?></span></li> 
+                                <li>Discount <span>-₹<?php echo $_SESSION['code_value']; ?></span></li> 
                                 <?php
                                 $cart_price -= $_SESSION['code_value'];
                             }
                             ?>
-                            <li>Total <span><?php echo $cart_price; ?></span></li>
+                            <li>Total <span>₹<?php echo $cart_price; ?></span></li>
                         </ul>
                         <a href="checkout.php?cart_price=<?php echo $cart_price?>" class="primary-btn">Proceed to checkout</a>
                     </div>
@@ -305,7 +309,7 @@ switch($_GET["action"]) {
                 <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                            <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                         </div>
                         <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
                         <div class="footer__payment">

@@ -33,9 +33,10 @@
   color: black;
 }
 
+
 .dark-mode {
   background-color: black;
-  color: white;
+  color: white !important ;
 }
 
 .fa-sun {
@@ -59,7 +60,7 @@
             </a></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+            <a href="./index.php"><img src="img/logo1.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
@@ -69,7 +70,7 @@
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
+    <header id="header" class="header">
         <div class="container-fluid">
 
             <div class="row">
@@ -132,7 +133,7 @@
             function myFunction() {
                var element = document.body;
                element.classList.toggle("dark-mode");
-               document.getElementBy
+
             }
             </script>
             <div class="row">
@@ -143,7 +144,7 @@
                         <h1>Women’s fashion</h1>
                         <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
                         edolore magna aliquapendisse ultrices gravida.</p>
-                        <a href="women.html">Shop now</a>
+                        <a href="women.php">Shop now</a>
                     </div>
                 </div>
             </div>
@@ -344,7 +345,7 @@
             <div class="col-lg-4 col-md-6 col-sm-7">
                 <div class="footer__about">
                     <div class="footer__logo">
-                        <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                        <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                     </div>
                     <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
                     <div class="footer__payment">
@@ -387,9 +388,9 @@
 <div class="search-model">
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
-        <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here.....">
-        </form>
+        <form class="search-model-form" action="search-result.php" method="POST">
+                <input type="text" id="search-input" placeholder="Search here....." name='search-input'>
+            </form>
     </div>
 </div>
 <!-- Search End -->

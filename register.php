@@ -24,10 +24,19 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <style type="text/css">
+        .imageclass{
+            padding-top:190px;
+            margin-left: 0px;
+            float: left;
+            height:500px;
+        }
         .contact__content {
             text-align: center;
-            margin-left: 390px;
-            width: 70%;
+            margin-left: 650px;
+            width: 85%;
+            box-shadow: 2px 2px 2px 2px ;
+            display:block;
+            padding: 40px;
         }
     </style>
 </head>
@@ -56,9 +65,42 @@
         $flag=0;
         $uname='';
         $mobno='';
+        $CityErr='';
         $address='';
         $email='';
+        $fnameErr='';
+        $lnameErr='';
         if(isset($_POST['submit'])){
+            if(empty($_POST['fname']))
+            {
+                $fnameErr="First Name required";
+            }
+            else{
+                if(preg_match("/^[a-zA-Z]/",$_POST['fname']))
+                {
+             
+                $flag+=1;
+                }
+                else
+                {
+                    $fnameErr="Only alphabets";
+                }
+            }
+            if(empty($_POST['lname']))
+            {
+                $lnameErr="Last Name required";
+            }
+            else{
+                if(preg_match("/^[a-zA-Z]/",$_POST['lname']))
+                {
+             
+                $flag+=1;
+                }
+                else
+                {
+                    $lnameErr="Only alphabets";
+                }
+            }
             if(empty($_POST['name'])){
                 $unameErr="Username required";
             }
@@ -112,7 +154,22 @@
                 $emailErr="Proper email is required";
             }
         }
-        if($flag==4)
+        if(empty($_POST['city']))
+            {
+                $CityErr="City required";
+            }
+            else{
+                if(preg_match("/^[a-zA-Z]/",$_POST['city']))
+                {
+             
+                $flag+=1;
+                }
+                else
+                {
+                    $CityErr="Only alphabets";
+                }
+            }
+        if($flag==7)
             {      		
                 $acc_bal="10000";
                 $cvv=rand(1000,9999);
@@ -123,7 +180,12 @@
                 $uname=mysqli_real_escape_string($mysqli, $_POST['name']); 
                 $email=mysqli_real_escape_string($mysqli, $_POST['email']);
                 $password=mysqli_real_escape_string($mysqli, $_POST['pwd']);
+                $mobno=mysqli_real_escape_string($mysqli, $_POST['mobno']);
                 $address=mysqli_real_escape_string($mysqli, $_POST['address']);
+                $fname=mysqli_real_escape_string($mysqli, $_POST['fname']);
+                $lname=mysqli_real_escape_string($mysqli, $_POST['lname']);
+                $city=mysqli_real_escape_string($mysqli, $_POST['city']);
+                $state=mysqli_real_escape_string($mysqli, $_POST['state']);
                 $stmt = $mysqli->prepare("SELECT Email FROM user_details WHERE Email = ? LIMIT 1");
                 $stmt->bind_param('s',$email);
                 $stmt->execute();
@@ -136,8 +198,8 @@
                 }
                 else{
                 $balance=10000;
-                $sql = $mysqli->prepare("INSERT INTO user_details (Name,Email,Account_Bal,Password,CVV,Address) VALUES (?,?,?,?,?,?)");
-                $sql->bind_param("ssisis",$uname,$email,$balance,$password,$cvv,$address);
+                $sql = $mysqli->prepare("INSERT INTO user_details (Name,FirstName,LastName,Email,MobileNo,Account_Bal,Password,CVV,Address,City,State) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+                $sql->bind_param("sssssisisss",$uname,$fname,$lname,$email,$mobno,$balance,$password,$cvv,$address,$city,$state);
                 if ($sql->execute()) {
                         session_start();
                         $_SESSION["email"] = $email;
@@ -153,7 +215,7 @@
                 else
                 {
                     $addErr="Signup failed...
-                    Click  <a href='Signup.html'>here</a> to go back to signup page";
+                    Click  <a href='register.php'>here</a> to go back to signup page";
                 }
             }
         }  
@@ -179,7 +241,7 @@
                 </a></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+            <a href="./index.php"><img src="img/logo1.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
@@ -195,20 +257,20 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                        <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
+                            <li><a href="women.php">Women’s</a></li>
+                            <li><a href="men.php">Men’s</a></li>
+                        
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
+                                    <li><a href="./shop-cart.php">Shop Cart</a></li>
                                     <li><a href="./checkout.html">Checkout</a></li>
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
@@ -243,6 +305,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
+                    <div class="imageclass">
+                        <img src="./img/signin.jpg"/>
+                        </div>
                     <div class="contact__content">
                         <div class="contact__form">
                             <form name="myform" onsubmit="return validate()" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post"
@@ -255,6 +320,20 @@
                                             <input type="text" name="name" placeholder="Atleast 3 characters" autofocus
                                                 required><br> <span class="error"><?php echo $unameErr;?></span>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                    <td>
+                                    First Name
+                                    <input type="text" name="fname" placeholder="Enter First Name" autofocus
+                                                required><br> <span class="error"><?php echo $fnameErr;?></span>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>
+                                    Last Name
+                                    <input type="text" name="lname" placeholder="Enter Last Name" autofocus
+                                                required><br> <span class="error"><?php echo $lnameErr;?></span>
+                                    </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -294,6 +373,60 @@
                                             <span class="error"><?php echo $addErr;?></span>  
                                         </td>
                                     </tr>
+                                
+                                    <tr>
+                                        <td>
+                                            State:<br>
+                                            <select name="state" id="state" class="form-control">
+                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                            <option value="Assam">Assam</option>
+                                            <option value="Bihar">Bihar</option>
+                                            <option value="Chandigarh">Chandigarh</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                            <option value="Daman and Diu">Daman and Diu</option>
+                                            <option value="Delhi">Delhi</option>
+                                            <option value="Lakshadweep">Lakshadweep</option>
+                                            <option value="Puducherry">Puducherry</option>
+                                            <option value="Goa">Goa</option>
+                                            <option value="Gujarat">Gujarat</option>
+                                            <option value="Haryana">Haryana</option>
+                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                            <option value="Jharkhand">Jharkhand</option>
+                                            <option value="Karnataka">Karnataka</option>
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                            <option value="Maharashtra">Maharashtra</option>
+                                            <option value="Manipur">Manipur</option>
+                                            <option value="Meghalaya">Meghalaya</option>
+                                            <option value="Mizoram">Mizoram</option>
+                                            <option value="Nagaland">Nagaland</option>
+                                            <option value="Odisha">Odisha</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan">Rajasthan</option>
+                                            <option value="Sikkim">Sikkim</option>
+                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                            <option value="Telangana">Telangana</option>
+                                            <option value="Tripura">Tripura</option>
+                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                            <option value="Uttarakhand">Uttarakhand</option>
+                                            <option value="West Bengal">West Bengal</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    
+                                    
+                                    <tr>
+                                        <td>
+                                        <br>
+                                            City:<br>
+                                            <input type="text" name="city" placeholder="Enter Enter City"><br>
+                                            <span class="error"><?php echo $CityErr;?></span>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <p>By creating an account you agree to our <a href="#"
@@ -315,6 +448,7 @@
                                     </tr>
                                 </table>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -328,7 +462,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                            <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                         </div>
                         <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of
                             merchandise.</p>
@@ -388,8 +522,8 @@
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
+            <form class="search-model-form" action="search-result.php" method="POST">
+                <input type="text" id="search-input" placeholder="Search here....." name='search-input'>
             </form>
         </div>
     </div>

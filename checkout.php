@@ -59,12 +59,11 @@ session_start();
             <li><span class="icon_search search-switch"></span></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+            <a href="./index.php"><img src="img/logo1.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
-            <a href="login.php">Login</a>
-            <a href="register.php">Register</a>
+            
         </div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -75,13 +74,13 @@ session_start();
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                        <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
+                            <li><a href="./index.php">Home</a></li>
                             <li><a href="#">Women’s</a></li>
                             <li><a href="#">Men’s</a></li>
                             <li class="active"><a href="./shop.html">Shop</a></li>
@@ -101,8 +100,7 @@ session_start();
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
+                            
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>                            
@@ -123,7 +121,7 @@ session_start();
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="./index.php"><i class="fa fa-home"></i> Home</a>
                         <span>Shopping cart</span>
                     </div>
                 </div>
@@ -143,32 +141,31 @@ session_start();
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>First Name <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" value="<?php echo $user_details['FirstName']; ?>">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Last Name <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" value="<?php echo $user_details['LastName']; ?>">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="checkout__form__input">
                                     <p>Country <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" value="India">
                                 </div>
                                 <div class="checkout__form__input">
-                                    <p>Address <span>*</span></p>                                    
-                                    <input type="text" placeholder="Street Address">
+                                    <p>Address <span>*</span></p>                                   
                                     <input type="text" placeholder="Apartment. suite, unite ect ( optinal )" value="<?php echo $user_details['Address']; ?>">
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Town/City <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" value="<?php echo $user_details['City']; ?>">
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Country/State <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" value="<?php echo $user_details['State']; ?>">
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Postcode/Zip <span>*</span></p>
@@ -300,7 +297,7 @@ if(isset($_POST["submitt"]))
                     <div class="col-lg-4 col-md-6 col-sm-7">
                         <div class="footer__about">
                             <div class="footer__logo">
-                                <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                                <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                             </div>
                             <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
                             <div class="footer__payment">
@@ -343,9 +340,9 @@ if(isset($_POST["submitt"]))
         <div class="search-model">
             <div class="h-100 d-flex align-items-center justify-content-center">
                 <div class="search-close-switch">+</div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here.....">
-                </form>
+                <form class="search-model-form" action="search-result.php" method="POST">
+                <input type="text" id="search-input" placeholder="Search here....." name='search-input'>
+            </form>
             </div>
         </div>
         <!-- Search End -->

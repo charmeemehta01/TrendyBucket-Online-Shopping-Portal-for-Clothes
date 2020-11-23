@@ -25,10 +25,18 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <style type="text/css">
+        .imageclass{
+            margin-top: 0px;
+            float: left;
+        }
         .contact__content {
-    text-align: center;
-    margin-left: 390px;
-    width: 70%;
+            text-align: center;
+            margin-left: 650px;
+            width: 85%;
+            margin-top:80px;
+            box-shadow: 2px 2px 2px 2px;
+            display:block;
+            padding: 40px;
     }
     </style>
 </head>
@@ -153,7 +161,7 @@ catch (phpmailerException $e) {
                             <li class="active"><a href="./index.php">Home</a></li>
                             <li><a href="women.php">Women’s</a></li>
                             <li><a href="men.php">Men’s</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
+                        
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
@@ -192,6 +200,9 @@ catch (phpmailerException $e) {
 <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
+                <div class="imageclass">
+                        <img src="./img/forgot_pass.jpg"/>
+                        </div>
                     <div class="contact__content">
                         <div class="contact__form">
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return validate()" method='post'>
