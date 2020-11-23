@@ -269,7 +269,7 @@ if(isset($_POST["submitt"]))
                     {
                         ?>
                           <script type="text/javascript">
-                              window.location.assign('payment.php') ;
+                              window.location.assign('success.php') ;
                           </script>
 
                     <?php

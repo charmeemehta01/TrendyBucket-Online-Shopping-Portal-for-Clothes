@@ -142,8 +142,7 @@
                     data-setbg="img/categories/category-1.jpg">
                     <div class="categories__text">
                         <h1>Women’s fashion</h1>
-                        <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
-                        edolore magna aliquapendisse ultrices gravida.</p>
+                        <p>Bringing you the hottest styles for winter!</p>
                         <a href="women.php">Shop now</a>
                     </div>
                 </div>
@@ -152,7 +151,7 @@
                     <div class="categories__item categories__large__item set-bg" data-setbg="img/categories/category-2.jpg">
                     <div class="categories__text">
                         <h1>Men’s fashion</h1>
-                        <p>358 items</p>
+                        <p>Time to bag the styles in your waitlist!</p>
                         <a href="men.html">Shop now</a>
                     </div>
                 </div>

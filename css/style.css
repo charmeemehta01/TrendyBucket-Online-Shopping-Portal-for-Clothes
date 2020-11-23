@@ -1212,23 +1212,6 @@ ol {
 	opacity: 0;
 }
 
-.product__hover li:nth-child(1) {
-	-webkit-transition: all 0.4s ease 0.1s;
-	-o-transition: all 0.4s ease 0.1s;
-	transition: all 0.4s ease 0.1s;
-}
-
-.product__hover li:nth-child(2) {
-	-webkit-transition: all 0.4s ease 0.15s;
-	-o-transition: all 0.4s ease 0.15s;
-	transition: all 0.4s ease 0.15s;
-}
-
-.product__hover li:nth-child(3) {
-	-webkit-transition: all 0.4s ease 0.2s;
-	-o-transition: all 0.4s ease 0.2s;
-	transition: all 0.4s ease 0.2s;
-}
 
 .product__hover li:last-child {
 	margin-right: 0;
@@ -1240,9 +1223,6 @@ ol {
 
 .product__hover li:hover a span {
 	color: #ffffff;
-	-webkit-transform: rotate(360deg);
-	-ms-transform: rotate(360deg);
-	transform: rotate(360deg);
 }
 
 .product__hover li a {
@@ -1255,19 +1235,10 @@ ol {
 	line-height: 48px;
 	text-align: center;
 	border-radius: 50%;
-	-webkit-transition: all, 0.5s;
-	-o-transition: all, 0.5s;
-	transition: all, 0.5s;
 }
 
 .product__hover li a span {
 	position: relative;
-	-webkit-transform: rotate(0);
-	-ms-transform: rotate(0);
-	transform: rotate(0);
-	-webkit-transition: all, 0.3s;
-	-o-transition: all, 0.3s;
-	transition: all, 0.3s;
 	display: inline-block;
 }
 

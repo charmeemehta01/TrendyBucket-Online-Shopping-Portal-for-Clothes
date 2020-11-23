@@ -41,16 +41,13 @@ session_start();
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
         </ul>
         <div class="offcanvas__logo">
             <a href="./index.php"><img src="img/logo1.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
-       <?php
+            <?php
         if (isset($_SESSION['name']))
         {
             print "Welcome, ".$_SESSION['name'];
@@ -73,10 +70,8 @@ session_start();
                     <nav class="header__menu">
                         <ul>
                             <li><a href="./index.php">Home</a></li>
-                            <li><a href="women.php">Women’s</a></li>
+                            <li><a href="women.php?filter=">Women’s</a></li>
                             <li class="active"><a href="men.php">Men’s</a></li>
-                            
-                            
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
@@ -93,18 +88,15 @@ session_start();
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                        <?php
-        if (isset($_SESSION['name']))
-        {
-            print "Welcome, ".$_SESSION['name'];
-        }
-        ?>
+                            <?php
+                            if (isset($_SESSION['name']))
+                            {
+                                print "Welcome, ".$_SESSION['name'];
+                            }
+                            ?>
                         </div>
                         <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
+                            <li><span class="icon_search search-switch"></span></li>                            
                         </ul>
                     </div>
                 </div>
@@ -130,7 +122,15 @@ session_start();
         </div>
     </div>
     <!-- Breadcrumb End -->
-
+    <?php
+        $conn = new mysqli('localhost','root','','trendybucket') or die(mysqli_error());
+        $search="";
+        
+        if($_GET["filter"]) {
+         $search = $_GET["filter"];
+        }
+        
+    ?>
     <!-- Shop Section Begin -->
     <section class="shop spad">
         <div class="container">
@@ -150,11 +150,11 @@ session_start();
                                         <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
                                                 <ul>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Trousers & Pants</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
+                                                    <li><a href="men.php?filter=Shirt">Shirts</a></li>
+                                                    <li><a href="men.php?filter=Jacket">Jackets</a></li>
+                                                    <li><a href="men.php?filter=Chinos">Trousers & Pants</a></li>
+                                                    <li><a href="men.php?filter=T-shirt">T-shirts</a></li>
+                                                    <li><a href="men.php?filter=Jeans">Jeans</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -162,113 +162,70 @@ session_start();
                                 </div>
                             </div></div>
                         <div class="sidebar__filter">
+                            <form method="post">
+
                             <div class="section-title">
                                 <h4>Shop by price</h4>
                             </div>
+                            <?php
+                            $minamount = 499;
+                            $maxamount = 4899;
+
+                            if (! empty($_POST['min_price'])) {
+                                $minamount = $_POST['min_price'];
+                            }
+                            //echo $minamount;
+                            if (! empty($_POST['max_price'])) {
+                                $maxamount = $_POST['max_price'];
+                                //echo $minamount;
+                                //echo $maxamount;
+                            }
+
+                            ?>
                             <div class="filter-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                 data-min="499" data-max="4899"></div>
                                 <div class="range-slider">
                                     <div class="price-input">
                                         <p>Price:</p>
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
+                                        <input type="" id="minamount" name="min_price" value="<?php echo $minamount; ?>">
+                                        <input type="" id="maxamount" name="max_price" value="<?php echo $maxamount; ?>">
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">Filter</a>
-                        </div>
-                        <div class="sidebar__sizes">
-                            <div class="section-title">
-                                <h4>Shop by size</h4>
-                            </div>
-                            <div class="size__list">
-                                <label for="xxs">
-                                    xxs
-                                    <input type="checkbox" id="xxs">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xs">
-                                    xs
-                                    <input type="checkbox" id="xs">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="s">
-                                    s
-                                    <input type="checkbox" id="s">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="m">
-                                    m
-                                    <input type="checkbox" id="m">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="l">
-                                    l
-                                    <input type="checkbox" id="l">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xl">
-                                    xl
-                                    <input type="checkbox" id="xl">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="sidebar__color">
-                            <div class="section-title">
-                                <h4>Shop by color</h4>
-                            </div>
-                            <div class="size__list color__list">                            
-                                <label for="khakis">
-                                    Khaki
-                                    <input type="checkbox" id="khaki">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greys">
-                                    Grey
-                                    <input type="checkbox" id="grey">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="blues">
-                                    Blue
-                                    <input type="checkbox" id="blue">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greens">
-                                    Green
-                                    <input type="checkbox" id="green">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="pink">
-                                    Pink
-                                    <input type="checkbox" id="pink">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
+                            <a href="men.php?filter="><input type="submit" name="submit_range" class="btn-submit" value="Filter"/></a>
+                        </form>
+                        </div>  
+                            <?php 
+                            $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());
+                            
+                            $res = mysqli_query($conn, "select * from product where name LIKE '%".$search."%' AND price BETWEEN '$minamount' AND '$maxamount' AND gender= 'M' ORDER BY id ASC");
+                            $count = mysqli_num_rows($res);
+                            //if ($count > 0) {
+                              //  echo "qwertty"; 
+                                ?>
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-9">
-                    <div class="row">
-<?php
-    $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());
-    $sql = "SELECT * FROM product where gender= 'M' ORDER BY id ASC";
-    $product_array = mysqli_query($conn, $sql);
-        
-   
-                while($row = mysqli_fetch_assoc($product_array)) {
+                    
+                    <div class="row">    
+                    <?php
+                        //$sql = "SELECT * FROM product where gender= 'M' ORDER BY id ASC";
+                        //$product_array = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_array($res)) {
                     ?>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
+                                <?php
+                                    ?>
                                 <div class="product__item__pic set-bg" data-setbg="<?php echo $row["image"]; ?>">
                                     <form method="POST" action="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>"> 
-                                    <ul class="product__hover" style="margin-left: 0%;">
-                                    <li ><a href="<?php echo $row["image"]; ?>" style="background:#ca1515;" class="image-popup"><span class="arrow_expand" style="color:white;"></span></a></li>
+                                    <ul class="product__hover">
+                                    <li><a href="<?php echo $row["image"]; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li>
-                                            <a href=""><input type="submit" id="atc" value="Add to Cart" style="border-radius: 8px; background-color:  #ca1515; border:0px; color:white; " /></a></li>
-                                    </ul>
-                                    
+                                            <a href=""><input type="submit" id="atc" value="Add to Cart" style="border-radius: 10px; background-color:  #ca1515; border:0px; color: white;text-align: left;" /></a>
+                                        </li>
+                                    </ul>                                    
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#"><?php echo $row["name"]; ?></a></h6>
@@ -284,10 +241,15 @@ session_start();
                                         <input type="text" name="<?php echo $row["code"]; ?>_quantity" value="1">
                                     </div>
                                 </div>  
+                                
                                 </form>                          
                             </div>
                         </div>
-                    <?php }  ?>
+                        <?php
+                                    //} 
+                                //} 
+                                //mysqli_free_result($res);
+                            }?>
                         <script>
                             function add_cart() {
                                 var x = document.getElementById('add_cart_form').value;
@@ -295,6 +257,8 @@ session_start();
                             }function func(e) {console.log(e.target.value);}
                         </script>
                             </div>
+                            
+
                         </div>
                     </div>
                 </div>
@@ -357,6 +321,24 @@ session_start();
         </div>
     </div>
     <!-- Search End -->
+    <script type="text/javascript">
+  
+  $(function() {
+    $( "#range-slider" ).slider({
+      range: true,
+      minamount: 499,
+      maxamount: 4899,
+      values: [ <?php echo $minamount; ?>, <?php echo $maxamount; ?> ],
+      slide: function( event, ui ) {
+        $( "#amount" ).html( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+        $( "#minamount" ).val(ui.values[ 0 ]);
+        $( "#maxamount" ).val(ui.values[ 1 ]);
+      }
+      });
+    $( "#amount" ).html( "$" + $( "#range-slider" ).slider( "values", 0 ) +
+     " - $" + $( "#range-slider" ).slider( "values", 1 ) );
+  });
+  </script>
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -370,5 +352,4 @@ session_start();
     <script src="js/jquery.nicescroll.min.js"></script>
     <script src="js/main.js"></script>
 </body>
-
 </html>

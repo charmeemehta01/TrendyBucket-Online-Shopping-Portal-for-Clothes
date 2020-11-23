@@ -168,7 +168,7 @@ session_start();
                             </div>
                             <div class="filter-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="99"></div>
+                                data-min="649" data-max="9999"></div>
                                 <div class="range-slider">
                                     <div class="price-input">
                                         <p>Price:</p>
@@ -182,6 +182,7 @@ session_start();
                     </div>   
                     </div>             
                 <div class="col-lg-9 col-md-9">
+                    
                     <div class="row">
 <?php
     $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());
@@ -189,13 +190,14 @@ session_start();
     $product_array = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_assoc($product_array)) {
                     ?>
-
-                        <div class="col-lg-4 col-md-6">
-                          <div class="product__item sale">
+                     <div class="col-lg-4 col-md-6">
+                          <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<?php echo $row["image"]; ?>">
-                                    <ul class="product__hover">
+                                 <form method="POST" action="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>">
+                                     <ul class="product__hover">
                                         <li><a href="<?php echo $row["image"]; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                        <li><a href=""><input type="submit" id="atc" value="Add to Cart" style="border-radius: 10px; background-color:  #ca1515; border:0px; color: white;text-align: left;" /></a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -208,13 +210,24 @@ session_start();
                                         <i class="fa fa-star"></i>
                                     </div>                                    
                                     <div class="product__price">₹<?php echo $row["price"]; ?></div>
+                                    <div class="pro-qty">
+                                        <input type="text" name="<?php echo $row["code"]; ?>_quantity" value="1">
+                                    </div>
                                 </div>
+                            </form>
                             </div>
                         </div>
-                    <?php }  ?>                      
+                    <?php }  ?>     
+                    <script>
+                            function add_cart() {
+                                var x = document.getElementById('add_cart_form').value;
+                                x[0].submit();
+                            }function func(e) {console.log(e.target.value);}
+                    </script>                 
                     </div>
                     </div>
-                    </div>                    
+                    </div>  
+                    </div>                  
             </div>
         </div>
     </section>
