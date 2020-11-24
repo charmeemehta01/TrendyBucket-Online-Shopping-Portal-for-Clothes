@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TrendyBucket - Sign Up</title>
+    <title>TrendyBucket - Success</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
@@ -33,6 +33,8 @@
             padding: 40px;
         }
     </style>
+    <script type="text/javascript"> 
+    </script> 
 </head>
 
 <body>
@@ -204,9 +206,9 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="women.php">Women’s</a></li>
-                            <li><a href="men.php">Men’s</a></li>
+                            <li><a href="./index.html">Home</a></li>
+                            <li><a href="women.php?filter=">Women’s</a></li>
+                            <li><a href="men.php?filter=">Men’s</a></li>
                             <li><a href="./shop.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
@@ -227,12 +229,6 @@
                             <a href="login.php">Login</a>
                             <a href="register.php">Register</a>
                         </div>
-                        <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                    <div class="tip">2</div>
-                                </a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -245,6 +241,56 @@
     <section class="contact spad">
     <img src=".\img\successful-purchase-concept-illustration_114360-1003.jpg"/>
     </section>
+    <div class="col-lg-4">
+                            <div class="checkout__order">
+                                <h5>Your order</h5>
+                                <div class="checkout__order__product">
+                                    <ul>
+                                        <li>
+                                            <span class="top__text">Product</span>
+                                            <span class="top__text__right">Total</span>
+                                        </li>
+                                        <?php
+                            
+                            if(isset($_SESSION["cart_item"]))
+                            {                            
+                                $cart_price = 0;
+                            foreach ($_SESSION["cart_item"] as $item){
+                                $item_price = $item["quantity"]*$item["price"];
+                                $total_quantity = 0;
+                                $total_quantity += $item["quantity"];
+                                $_SESSION["total_quantity"]=$total_quantity;
+                                $total_price = 0;                                
+                                $total_price += ($item["price"]*$item["quantity"]);                                
+                                $cart_price += $total_price;
+                                $_SESSION["total_price"]=$total_price;
+                                ?>
+                                        <li><?php echo $item["name"]; ?><span>₹<?php echo $total_price; ?></span></li>
+                                        <?php  
+                                }
+                                        ?>
+                                    </ul>
+                                </div>
+                                <div class="checkout__order__total">
+                                    <ul>
+                                        <li>Subtotal <span>₹<?php echo $_GET["cart_price"]; ?></span></li>
+                                        <?php if($_SESSION['code_value'] > 0) { ?>                            
+                                        <li>Discount <span>-₹<?php echo $_SESSION['code_value']; ?></span></li> 
+                                        <?php
+                                        $_GET["cart_price"] -= $_SESSION['code_value'];
+                                    }
+                                    ?>
+                                        <li>Total <span>₹<?php echo $_GET["cart_price"]; ?></span></li>
+                                    </ul>
+                                </div>
+                                <?php } ?>
+                                <form> 
+                                <input type="button" value="Print"
+                                    onclick="window.print()" /> 
+                            </form>
+                            </div>
+                        </div>
+     
     <!-- Footer Section Begin -->
     <footer class="footer">
         <div class="container">
@@ -287,23 +333,6 @@
                         </ul>
                     </div>
                 </div>
-                <!--<div class="col-lg-4 col-md-8 col-sm-8">
-                <div class="footer__newslatter">
-                    <h6>NEWSLETTER</h6>
-                    <form action="#">
-                        <input type="text" placeholder="Email">
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
-                    <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>-->
             </div>
     </footer>
     <!-- Footer Section End -->

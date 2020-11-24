@@ -69,8 +69,8 @@ session_start();
                     <nav class="header__menu">
                         <ul>
                             <li><a href="./index.php">Home</a></li>
-                            <li class="active"><a href="women.php">Women’s</a></li>
-                            <li><a href="men.php">Men’s</a></li>
+                            <li class="active"><a href="women.php?filter=">Women’s</a></li>
+                            <li><a href="men.php?filter=">Men’s</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
@@ -163,35 +163,51 @@ session_start();
                             </div>
                         </div>
                         <div class="sidebar__filter">
+                            <form method="get">
                             <div class="section-title">
                                 <h4>Shop by price</h4>
                             </div>
+                            <?php
+                                $_SESSION['minamount'] = 499;
+                                $_SESSION['maxamount'] = 4899;                               
+                            if (!empty($_GET['min_price'])) {
+                               $_SESSION['minamount'] = $_GET['min_price'];
+                            }
+                            if (!empty($_GET['max_price'])) {
+                                $_SESSION['maxamount'] = $_GET['max_price'];
+                            }
+                            ?>
                             <div class="filter-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="649" data-max="9999"></div>
+                                data-min="<?php echo $_SESSION['minamount']; ?>" data-max="<?php echo $_SESSION['maxamount'] ?>"></div>
                                 <div class="range-slider">
                                     <div class="price-input">
                                         <p>Price:</p>
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
+                                        <input type="" id="minamount" name="min_price" value="<?php echo $_SESSION['minamount']; ?>">
+                                        <input type="" id="maxamount" name="max_price" value="<?php echo $_SESSION['maxamount']; ?>">
+                                        <input type="hidden" value="" name="filter"/>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">Filter</a>
+                            <a href="women.php?filter="><input type="submit" class="btn-submit" value="Filter"/></a>
+                        </form>
                         </div>
+                        <?php 
+                            $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());
+                            $res = mysqli_query($conn, "select * from product where name LIKE '%".$search."%' AND price BETWEEN '".$_SESSION['minamount']."' AND '".$_SESSION['maxamount']."' AND gender= 'F' ORDER BY id ASC");
+                            $count = mysqli_num_rows($res); 
+                            ?>
                     </div>   
                     </div>             
-                <div class="col-lg-9 col-md-9">
-                    
+                <div class="col-lg-9 col-md-9">                    
                     <div class="row">
-<?php
-    $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());
-    $sql = "SELECT * FROM product where name LIKE '%".$search."%' AND gender='F' ORDER BY id ASC";
-    $product_array = mysqli_query($conn, $sql);
-                while($row = mysqli_fetch_assoc($product_array)) {
-                    ?>
+                        <?php
+                            while ($row = mysqli_fetch_array($res)) {
+                        ?>
                      <div class="col-lg-4 col-md-6">
                           <div class="product__item">
+                            <?php
+                                    ?>
                                 <div class="product__item__pic set-bg" data-setbg="<?php echo $row["image"]; ?>">
                                  <form method="POST" action="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>">
                                      <ul class="product__hover">

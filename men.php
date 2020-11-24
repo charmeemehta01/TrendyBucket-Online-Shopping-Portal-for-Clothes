@@ -35,6 +35,7 @@ session_start();
     <div id="preloder">
         <div class="loader"></div>
     </div>
+   <!--  -->
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
@@ -71,7 +72,7 @@ session_start();
                         <ul>
                             <li><a href="./index.php">Home</a></li>
                             <li><a href="women.php?filter=">Women’s</a></li>
-                            <li class="active"><a href="men.php">Men’s</a></li>
+                            <li class="active"><a href="men.php?filter=">Men’s</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
@@ -162,56 +163,45 @@ session_start();
                                 </div>
                             </div></div>
                         <div class="sidebar__filter">
-                            <form method="post">
-
+                            <form method="get">
                             <div class="section-title">
                                 <h4>Shop by price</h4>
                             </div>
                             <?php
-                            $minamount = 499;
-                            $maxamount = 4899;
-
-                            if (! empty($_POST['min_price'])) {
-                                $minamount = $_POST['min_price'];
+                                $_SESSION['minamount'] = 499;
+                                $_SESSION['maxamount'] = 4899;                               
+                            if (!empty($_GET['min_price'])) {
+                               $_SESSION['minamount'] = $_GET['min_price'];
                             }
-                            //echo $minamount;
-                            if (! empty($_POST['max_price'])) {
-                                $maxamount = $_POST['max_price'];
-                                //echo $minamount;
-                                //echo $maxamount;
+                            if (!empty($_GET['max_price'])) {
+                                $_SESSION['maxamount'] = $_GET['max_price'];
                             }
-
                             ?>
                             <div class="filter-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="499" data-max="4899"></div>
+                                data-min="<?php echo $_SESSION['minamount']; ?>" data-max="<?php echo $_SESSION['maxamount'] ?>"></div>
                                 <div class="range-slider">
                                     <div class="price-input">
                                         <p>Price:</p>
-                                        <input type="" id="minamount" name="min_price" value="<?php echo $minamount; ?>">
-                                        <input type="" id="maxamount" name="max_price" value="<?php echo $maxamount; ?>">
+                                        <input type="" id="minamount" name="min_price" value="<?php echo $_SESSION['minamount']; ?>">
+                                        <input type="" id="maxamount" name="max_price" value="<?php echo $_SESSION['maxamount']; ?>">
+                                        <input type="hidden" value="" name="filter"/>
                                     </div>
                                 </div>
                             </div>
-                            <a href="men.php?filter="><input type="submit" name="submit_range" class="btn-submit" value="Filter"/></a>
+                            <a href="men.php?filter="><input type="submit" class="btn-submit" value="Filter"/></a>
                         </form>
                         </div>  
                             <?php 
                             $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());
-                            
-                            $res = mysqli_query($conn, "select * from product where name LIKE '%".$search."%' AND price BETWEEN '$minamount' AND '$maxamount' AND gender= 'M' ORDER BY id ASC");
-                            $count = mysqli_num_rows($res);
-                            //if ($count > 0) {
-                              //  echo "qwertty"; 
-                                ?>
-                    </div>
+                            $res = mysqli_query($conn, "select * from product where name LIKE '%".$search."%' AND price BETWEEN '".$_SESSION['minamount']."' AND '".$_SESSION['maxamount']."' AND gender= 'M' ORDER BY id ASC");
+                            $count = mysqli_num_rows($res); 
+                            ?>
+                        </div>
                 </div>
-                <div class="col-lg-9 col-md-9">
-                    
+                <div class="col-lg-9 col-md-9">                    
                     <div class="row">    
-                    <?php
-                        //$sql = "SELECT * FROM product where gender= 'M' ORDER BY id ASC";
-                        //$product_array = mysqli_query($conn, $sql);
+                    <?php                        
                         while ($row = mysqli_fetch_array($res)) {
                     ?>
                         <div class="col-lg-4 col-md-6">
@@ -245,11 +235,7 @@ session_start();
                                 </form>                          
                             </div>
                         </div>
-                        <?php
-                                    //} 
-                                //} 
-                                //mysqli_free_result($res);
-                            }?>
+                        <?php } ?>
                         <script>
                             function add_cart() {
                                 var x = document.getElementById('add_cart_form').value;
@@ -257,8 +243,6 @@ session_start();
                             }function func(e) {console.log(e.target.value);}
                         </script>
                             </div>
-                            
-
                         </div>
                     </div>
                 </div>
