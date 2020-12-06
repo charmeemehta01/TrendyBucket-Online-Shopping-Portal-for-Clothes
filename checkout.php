@@ -29,9 +29,43 @@
 session_start();
 //retrieve in select, and declare a variable named $user_details
  $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());  
- $res =mysqli_query($conn,"SELECT * FROM user_details WHERE Name='" . $_SESSION["name"] . "'");  
+ $res=mysqli_query($conn,"SELECT * FROM user_details WHERE Name='" . $_SESSION["name"] . "'");  
  $user_details = mysqli_fetch_assoc($res);
-?>
+ if(isset($_POST["submitt"]))
+ { 
+     if(empty($_POST["cod"]))
+     {
+   $cvv=mysqli_real_escape_string($conn, $_POST['CVV']); 
+             if ($cvv==$user_details['CVV']) {
+                $bal=$user_details['Account_Bal']-$_SESSION["cart_price"];  
+                $sql = "UPDATE user_details SET Account_Bal=".$bal." WHERE Name='" . $_SESSION["name"] . "'";
+                if (mysqli_query($conn, $sql)) {
+                    ?>
+                    <script type="text/javascript">
+                    window.location.assign('success.php') ;
+                </script>
+                <?php
+                }
+            }
+                else{
+                    ?>
+                      <script type="text/javascript">
+                          alert("Invalid cvv");
+                          document.getElementById('CVV').focus;
+                      </script>
+                      <?php }
+     }
+     else
+     {
+        ?>
+        <script type="text/javascript">
+        window.location.assign('success.php') ;
+    </script>
+    <?php
+     }
+ }
+                      ?>
+
 
 <body>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -78,23 +112,16 @@ session_start();
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
+                <nav class="header__menu">
+                    <center>
                         <ul>
-                            <li><a href="./index.php">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li class="active"><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                        <li><a href="./index.php">Home</a></li>
+                            <li class="active" ><a href="women.php?filter=">Women’s</a></li>
+                            <li><a href="men.php?filter=">Men’s</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
+                            <li><a href="session_display.php">Logout</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
+                    </center>    
                     </nav>
                 </div>
                 <div class="col-lg-3">
@@ -133,7 +160,7 @@ session_start();
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">            
-            <form action="#" class="checkout__form">
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" class="checkout__form" method="POST">
                 <div class="row">
                     <div class="col-lg-8">
                         <h5>Billing detail</h5>
@@ -165,7 +192,7 @@ session_start();
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Postcode/Zip <span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" value="<?php echo $user_details['Pincode']; ?>">
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Country <span>*</span></p>
@@ -208,8 +235,8 @@ session_start();
                                 $_SESSION["total_quantity"]=$total_quantity;
                                 $total_price = 0;                                
                                 $total_price += ($item["price"]*$item["quantity"]);                                
-                                $cart_price += $total_price;
-                                $_SESSION["total_price"]=$total_price;
+                                $cart_price += $total_price;     
+                                $_SESSION["cart_price"]=$cart_price;
                                 ?>
                                         <li><?php echo $item["name"]; ?><span>₹<?php echo $total_price; ?></span></li>
                                         <?php  
@@ -233,7 +260,7 @@ session_start();
                                     
                                     <label for="check-payment">
                                         Cash on Delivery
-                                        <input type="checkbox" id="check-payment">
+                                        <input type="checkbox" id="check-payment" name="cod">
                                         <span class="checkmark"></span>
                                     </label>
                                     <label for="statwallet">
@@ -241,13 +268,15 @@ session_start();
                                         <input type="checkbox" id="statwallet">
                                         <span class="checkmark"></span>
                                     </label>
+                                    
                                      <div class="checkout__form__input">
                                     <div id="dvPassport" style="display: none">
                                  <p>CVV <span>*</span></p>
                                 <input type="text" id="CVV"  name="CVV" placeholder="Enter 4 digit CVV" />
                             </div>
                             </div>
-                                </div><?php } ?>   
+                                </div>
+                                <?php } ?>  
                                 <button type="submit" name="submitt" class="site-btn">Place order</button>
                             </div>
                         </div>
@@ -255,40 +284,7 @@ session_start();
                 </form>
             </div>
         </section>
-        <?php
 
-
-if(isset($_POST["submitt"]))
-{ 
-  $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error()); 
-  $cvv=mysqli_real_escape_string($conn, $_POST['CVV']); 
-          $sql=("SELECT * FROM user_details WHERE Email='".$_SESSION['email']."' AND CVV='".$cvv."'") or die(mysqli_error($conn));
-            if ($result=mysqli_query($conn,$sql)) {
-                    $rowcount=mysqli_num_rows($result);
-                    if($rowcount==1)
-                    {
-                        ?>
-                          <script type="text/javascript">
-                              window.location.assign('success.php') ;
-                          </script>
-
-                    <?php
-                    }
-                    else{
-                        ?>
-                          <script type="text/javascript">
-                              alert("Invalid cvv");
-                              document.getElementById('CVV').focus;
-                          </script>
-
-                    <?php
-                    }
-
-            } else {
-                mysqli_error($conn);
-            }
-  }
-?>
         <!-- Checkout Section End -->
         <!-- Footer Section Begin -->
         <footer class="footer">
@@ -340,7 +336,7 @@ if(isset($_POST["submitt"]))
         <div class="search-model">
             <div class="h-100 d-flex align-items-center justify-content-center">
                 <div class="search-close-switch">+</div>
-                <form class="search-model-form" action="search-result.php" method="POST">
+                <form class="search-model-form" action="search-result.php?filter=" method="POST">
                 <input type="text" id="search-input" placeholder="Search here....." name='search-input'>
             </form>
             </div>

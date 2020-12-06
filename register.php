@@ -185,6 +185,7 @@
                 $fname=mysqli_real_escape_string($mysqli, $_POST['fname']);
                 $lname=mysqli_real_escape_string($mysqli, $_POST['lname']);
                 $city=mysqli_real_escape_string($mysqli, $_POST['city']);
+                $pincode=mysqli_real_escape_string($mysqli, $_POST['pincode']);
                 $state=mysqli_real_escape_string($mysqli, $_POST['state']);
                 $stmt = $mysqli->prepare("SELECT Email FROM user_details WHERE Email = ? LIMIT 1");
                 $stmt->bind_param('s',$email);
@@ -198,8 +199,8 @@
                 }
                 else{
                 $balance=10000;
-                $sql = $mysqli->prepare("INSERT INTO user_details (Name,FirstName,LastName,Email,MobileNo,Account_Bal,Password,CVV,Address,City,State) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-                $sql->bind_param("sssssisisss",$uname,$fname,$lname,$email,$mobno,$balance,$password,$cvv,$address,$city,$state);
+                $sql = $mysqli->prepare("INSERT INTO user_details (Name,FirstName,LastName,Email,MobileNo,Account_Bal,Password,CVV,Address,City,State,Pincode) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                $sql->bind_param("sssssisisssi",$uname,$fname,$lname,$email,$mobno,$balance,$password,$cvv,$address,$city,$state,$pincode);
                 if ($sql->execute()) {
                         session_start();
                         $_SESSION["email"] = $email;
@@ -228,17 +229,15 @@
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
-    </div>
+    </div>  
 
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
-            <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                    <div class="tip">2</div>
-                </a></li>
+            
+            
         </ul>
         <div class="offcanvas__logo">
             <a href="./index.php"><img src="img/logo1.png" alt=""></a>
@@ -263,20 +262,7 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="women.php">Women’s</a></li>
-                            <li><a href="men.php">Men’s</a></li>
-                        
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.php">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                           
                         </ul>
                     </nav>
                 </div>
@@ -287,10 +273,7 @@
                             <a href="register.php">Register</a>
                         </div>
                         <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                    <div class="tip">2</div>
-                                </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -417,14 +400,18 @@
                                             </select>
                                         </td>
                                     </tr>
-                                    
-                                    
                                     <tr>
                                         <td>
                                         <br>
                                             City:<br>
-                                            <input type="text" name="city" placeholder="Enter Enter City"><br>
+                                            <input type="text" name="city" placeholder="Enter City"><br>
                                             <span class="error"><?php echo $CityErr;?></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Pincode:<br>
+                                            <input type="number" name="pincode" placeholder="Enter PINCODE"><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -455,67 +442,31 @@
             </div>
         </div>
     </section>
-    <!-- Footer Section Begin -->
     <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-7">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="./index.php"><img src="img/logo1.png" alt=""></a>
-                        </div>
-                        <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of
-                            merchandise.</p>
-                        <div class="footer__payment">
-                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-7">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-5">
-                    <div class="footer__widget">
-                        <h6>Quick links</h6>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4">
-                    <div class="footer__widget">
-                        <h6>Account</h6>
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Orders Tracking</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!--<div class="col-lg-4 col-md-8 col-sm-8">
-                <div class="footer__newslatter">
-                    <h6>NEWSLETTER</h6>
-                    <form action="#">
-                        <input type="text" placeholder="Email">
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
-                    <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
+                    <div class="footer__payment">
+                        <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
                     </div>
                 </div>
             </div>
-        </div>-->
+            <div class="col-lg-2 col-md-3 col-sm-5">
+                <div class="footer__widget">
+                    
             </div>
-    </footer>
+        </div>
+    </div>
+</footer>
     <!-- Footer Section End -->
 
     <!-- Search Begin -->

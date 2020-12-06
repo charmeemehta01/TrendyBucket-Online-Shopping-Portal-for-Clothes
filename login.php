@@ -96,6 +96,16 @@ function getIpAddr(){
     #result{color:red;}
     </style>
 </head>
+    <script>
+function myFunction() {
+  var x = document.getElementById("pwd");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 
 <body>
     <!-- Page Preloder -->
@@ -108,10 +118,7 @@ function getIpAddr(){
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
-            <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
+            
         </ul>
         <div class="offcanvas__logo">
             <a href="./index.html"><img src="img/logo1.png" alt=""></a>
@@ -136,20 +143,7 @@ function getIpAddr(){
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            
                         </ul>
                     </nav>
                 </div>
@@ -160,9 +154,7 @@ function getIpAddr(){
                             <a href="register.php">Register</a>
                         </div>
                         <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
+                            
                             </a></li>
                         </ul>
                     </div>
@@ -187,7 +179,19 @@ function getIpAddr(){
                             <h6>Enter your details below to continue</h6><br>
                             <form action="login.php" method="POST">
                                 <input type="email" name="email" placeholder="Email">
-                                <input type="password" name="pwd" placeholder="Password">
+                                <input type="password" name="pwd" placeholder="Password" id="pwd">
+                                <table>
+                                    <tr>
+                                        <td>
+                                        <input type="checkbox" name="pwd1" id="pwd1" onclick=myFunction() style="height:10px;">
+                                    </td>
+                                    <td>
+                                <label for="pwd1" style="margin-left:50px;">   Show Password</label>
+</td>
+</tr>
+</table>
+                                <br>                                       
+                                
                                 <a href='forgot_pass.php'>Forgot password?</a>
                                 <br>
                                 <br>
@@ -208,7 +212,7 @@ function getIpAddr(){
             <div class="col-lg-4 col-md-6 col-sm-7">
                 <div class="footer__about">
                     <div class="footer__logo">
-                        <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                        <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                     </div>
                     <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
                     <div class="footer__payment">
@@ -222,43 +226,9 @@ function getIpAddr(){
             </div>
             <div class="col-lg-2 col-md-3 col-sm-5">
                 <div class="footer__widget">
-                    <h6>Quick links</h6>
-                    <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blogs</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
+                    
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-4">
-                <div class="footer__widget">
-                    <h6>Account</h6>
-                    <ul>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Orders Tracking</a></li>
-                        <li><a href="#">Checkout</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!--<div class="col-lg-4 col-md-8 col-sm-8">
-                <div class="footer__newslatter">
-                    <h6>NEWSLETTER</h6>
-                    <form action="#">
-                        <input type="text" placeholder="Email">
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
-                    <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>-->
+        </div>
     </div>
 </footer>
 <!-- Footer Section End -->

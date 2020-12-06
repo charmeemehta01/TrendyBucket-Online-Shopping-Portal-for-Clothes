@@ -68,22 +68,16 @@ session_start();
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
+                <nav class="header__menu">
+                    <center>
                         <ul>
-                            <li><a href="./index.php">Home</a></li>
-                            <li><a href="women.php?filter=">Women’s</a></li>
+                        <li><a href="./index.php">Home</a></li>
+                            <li  ><a href="women.php?filter=">Women’s</a></li>
                             <li class="active"><a href="men.php?filter=">Men’s</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
+                            <li><a href="session_display.php">Logout</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
+                    </center>    
                     </nav>
                 </div>
                 <div class="col-lg-3">
@@ -189,7 +183,7 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <a href="men.php?filter="><input type="submit" class="btn-submit" value="Filter"/></a>
+                            <a href="men.php?filter="><input type="submit" class="btn-submit" value="Filter"  style="border-radius: 10px; background-color:  #ca1515; border:0px; color: white;text-align: left; padding:5px;" /></a>
                         </form>
                         </div>  
                             <?php 
@@ -211,7 +205,7 @@ session_start();
                                 <div class="product__item__pic set-bg" data-setbg="<?php echo $row["image"]; ?>">
                                     <form method="POST" action="shop-cart.php?action=add&code=<?php echo $row["code"]; ?>"> 
                                     <ul class="product__hover">
-                                    <li><a href="<?php echo $row["image"]; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                    <li ><a href="<?php echo $row["image"]; ?>" style="background-color:#ca1515; color:white;" class="image-popup"><span class="arrow_expand" ></span></a></li>
                                         <li>
                                             <a href=""><input type="submit" id="atc" value="Add to Cart" style="border-radius: 10px; background-color:  #ca1515; border:0px; color: white;text-align: left;" /></a>
                                         </li>
@@ -250,57 +244,38 @@ session_start();
         </div>
     </section>
     <!-- Shop Section End -->
-<!-- Footer Section Begin -->
     <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-7">
-                    <div class="footer__about">
-                        <div class="footer__logo">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-7">
+                <div class="footer__about">
+                    <div class="footer__logo">
                         <a href="./index.php"><img src="img/logo1.png" alt=""></a>
-                        </div>
-                        <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
-                        <div class="footer__payment">
-                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
-                        </div>
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-5">
-                    <div class="footer__widget">
-                        <h6>Quick links</h6>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4">
-                    <div class="footer__widget">
-                        <h6>Account</h6>
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Orders Tracking</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                        </ul>
+                    <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
+                    <div class="footer__payment">
+                        <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-2 col-md-3 col-sm-5">
+                <div class="footer__widget">
+                    
+            </div>
         </div>
-    </footer>
+    </div>
+</footer>
     <!-- Footer Section End -->
     <!-- Search Begin -->
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
+            <form class="search-model-form" action="search-result.php?filter=" method="POST">
+                <input type="text" id="search-input" placeholder="Search here....." name='search-input'>
             </form>
         </div>
     </div>

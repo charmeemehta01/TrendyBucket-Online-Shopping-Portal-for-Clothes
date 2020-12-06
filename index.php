@@ -26,24 +26,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
-</head>
-<style type="text/css">
-    body {
-  background-color: white;
-  color: black;
-}
-
-
-.dark-mode {
-  background-color: black;
-  color: white !important ;
-}
-
-.fa-sun {
-    color: #f39c12;
-}
-</style>
-<body class="dark-mode">
+<body>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -55,9 +38,6 @@
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>           
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
         </ul>
         <div class="offcanvas__logo">
             <a href="./index.php"><img src="img/logo1.png" alt=""></a>
@@ -81,21 +61,15 @@
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
+                    <center>
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="women.php">Women’s</a></li>
-                            <li><a href="men.php">Men’s</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                        <li class="active"><a href="./index.php">Home</a></li>
+                            <li ><a href="women.php?filter=">Women’s</a></li>
+                            <li><a href="men.php?filter=">Men’s</a></li>
+                            <li><a href="./contact.php">Contact</a></li>
+                            <li><a href="session_display.php">Logout</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
+                    </center>    
                     </nav>
                 </div>
                 <div class="col-lg-3">
@@ -104,16 +78,14 @@
                             <?php
                             session_start();
                             print "Welcome, ".$_SESSION['name']
-                            ?>
-
+                            ?>                            
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
                         </ul>
+                        
                     </div>
+                    
                 </div>
             </div>
             <div class="canvas__open">
@@ -127,15 +99,6 @@
     <section class="categories">
 
         <div class="container-fluid">
-            <button onclick="myFunction()" style="font-size:24px; margin-left:98%;border-style: none;background-color: transparent;">
-                <i class="fas fa-sun"></i></button>
-            <script>
-            function myFunction() {
-               var element = document.body;
-               element.classList.toggle("dark-mode");
-
-            }
-            </script>
             <div class="row">
                 <div class="col-lg-6 p-0">
                     <div class="categories__item categories__large__item set-bg"
@@ -143,7 +106,7 @@
                     <div class="categories__text">
                         <h1>Women’s fashion</h1>
                         <p>Bringing you the hottest styles for winter!</p>
-                        <a href="women.php">Shop now</a>
+                        <a href="women.php?filter=">Shop now</a>
                     </div>
                 </div>
             </div>
@@ -151,8 +114,8 @@
                     <div class="categories__item categories__large__item set-bg" data-setbg="img/categories/category-2.jpg">
                     <div class="categories__text">
                         <h1>Men’s fashion</h1>
-                        <p>Time to bag the styles in your waitlist!</p>
-                        <a href="men.html">Shop now</a>
+                        <p>Time to bag the styles in <br>your waitlist!</p>
+                        <a href="men.php?filter=">Shop now</a>
                     </div>
                 </div>
             </div>            
@@ -176,8 +139,7 @@
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
                         <ul class="product__hover">
-                            <li><a href="img/product/product-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            <li><a href="img/product/product-1.jpg" style="background-color:#ca1515; color:white;" class="image-popup"><span class="arrow_expand"></span></a></li>                    
                         </ul>
                     </div>
                     <div class="product__item__text">
@@ -197,7 +159,7 @@
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
                         <ul class="product__hover">
-                            <li><a href="img/product/product-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                            <li><a href="img/product/product-2.jpg" style="background-color:#ca1515; color:white;" class="image-popup"><span class="arrow_expand"></span></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
@@ -217,7 +179,7 @@
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
                         <ul class="product__hover">
-                            <li><a href="img/product/product-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>                         
+                            <li><a href="img/product/product-3.jpg" style="background-color:#ca1515; color:white;" class="image-popup"><span class="arrow_expand"></span></a></li>                         
                         </ul>
                     </div>
                     <div class="product__item__text">
@@ -237,7 +199,7 @@
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
                         <ul class="product__hover">
-                            <li><a href="img/product/product-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                            <li><a href="img/product/product-4.jpg" style="background-color:#ca1515; color:white;" class="image-popup"><span class="arrow_expand"></span></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
@@ -291,7 +253,6 @@
                             <p>Sec</p>
                         </div>
                     </div>
-                    <a href="#">Shop now</a>
                 </div>
             </div>
         </div>
@@ -307,13 +268,13 @@
                 <div class="services__item">
                     <i class="fa fa-car"></i>
                     <h6>Free Shipping</h6>
-                    <p>For all oder over $99</p>
+                    <p>For all order over ₹999</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="services__item">
                     <i class="fa fa-money"></i>
-                    <h6>Money Back Guarantee</h6>
+                    <h6>Money Back Guarqantee</h6>
                     <p>If good have Problems</p>
                 </div>
             </div>
@@ -358,25 +319,7 @@
             </div>
             <div class="col-lg-2 col-md-3 col-sm-5">
                 <div class="footer__widget">
-                    <h6>Quick links</h6>
-                    <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blogs</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-8 col-sm-8">
-                <div class="footer__widget">
-                    <h6>Account</h6>
-                    <ul>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Orders Tracking</a></li>
-                        <li><a href="#">Checkout</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                    </ul>
-                </div>
+                    
             </div>
         </div>
     </div>
@@ -387,7 +330,7 @@
 <div class="search-model">
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
-        <form class="search-model-form" action="search-result.php" method="POST">
+        <form class="search-model-form" action="search-result.php?filter=" method="POST">
                 <input type="text" id="search-input" placeholder="Search here....." name='search-input'>
             </form>
     </div>

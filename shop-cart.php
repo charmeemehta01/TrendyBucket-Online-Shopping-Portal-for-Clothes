@@ -22,10 +22,8 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="dark.css" media="(prefers-color-scheme:dark)">
-    <link rel="stylesheet" href="light.css" media="(prefers-color-scheme:no-preference),(prefers-color-scheme:light)">
+    
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script type="module" src="https://unpkg.com/dark-mode-toggle"></script>
     <style type="text/css">
     .quantity
     {
@@ -37,7 +35,6 @@
 
 <?php
 session_start();
-//unset($_SESSION["cart_item"]);
 if(!empty($_GET["action"])) {
  $conn=mysqli_connect('localhost','root','','trendybucket') or die(mysqli_error());   
  $_SESSION['code_value'] = 0;
@@ -143,21 +140,15 @@ switch($_GET["action"]) {
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
+                    <center>
                         <ul>
-                            <li><a href="./index.php">Home</a></li>
-                            <li><a href="women.php">Women’s</a></li>
-                            <li><a href="men.php">Men’s</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="./index.php">Home</a></li>
+                            <li ><a href="women.php?filter=">Women’s</a></li>
+                            <li><a href="men.php?filter=">Men’s</a></li>
                             <li><a href="./contact.html">Contact</a></li>
-                        </ul>
+                            <li><a href="session_display.php">Logout</a></li>
+                                </ul>
+                    </center>
                     </nav>
                 </div>
                 <div class="col-lg-3">
@@ -187,13 +178,7 @@ switch($_GET["action"]) {
                     </div>
                 </div>
             </div>
-            <dark-mode-toggle
-    id="dark-mode-toggle-1"
-    appearance="toggle"
-    dark="Dark"
-    light="Light"
-    remember="Remember this" style="max-width: 200px;font-size: 10px"></dark-mode-toggle>
-        </div>
+            
     </div>
 
     <!-- Breadcrumb End -->
@@ -267,7 +252,7 @@ switch($_GET["action"]) {
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn">
-                        <a href="men.php">Continue Shopping</a>
+                        <a href="index.php">Continue Shopping</a>
                     </div>
                 </div>              
             </div>
@@ -291,7 +276,9 @@ switch($_GET["action"]) {
                                 <li>Discount <span>-₹<?php echo $_SESSION['code_value']; ?></span></li> 
                                 <?php
                                 $cart_price -= $_SESSION['code_value'];
+
                             }
+                            $_SESSION['cart_price']=$cart_price;
                             ?>
                             <li>Total <span>₹<?php echo $cart_price; ?></span></li>
                         </ul>
@@ -304,56 +291,38 @@ switch($_GET["action"]) {
     <!-- Shop Cart Section End -->
     <!-- Footer Section Begin -->
     <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-7">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="./index.php"><img src="img/logo1.png" alt=""></a>
-                        </div>
-                        <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
-                        <div class="footer__payment">
-                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-7">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-5">
-                    <div class="footer__widget">
-                        <h6>Quick links</h6>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4">
-                    <div class="footer__widget">
-                        <h6>Account</h6>
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Orders Tracking</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                        </ul>
+                    <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
+                    <div class="footer__payment">
+                        <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-2 col-md-3 col-sm-5">
+                <div class="footer__widget">
+                    
+            </div>
         </div>
-    </footer>
+    </div>
+</footer>
     <!-- Footer Section End -->
 
     <!-- Search Begin -->
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
+            <form class="search-model-form" action="search-result.php?filter=" method="POST">
+                <input type="text" id="search-input" placeholder="Search here....." name='search-input'>
             </form>
         </div>
     </div>

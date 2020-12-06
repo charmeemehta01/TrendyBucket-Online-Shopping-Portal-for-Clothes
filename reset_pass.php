@@ -129,34 +129,15 @@ if($stmt->num_rows == 1)
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="./index.php">Home</a></li>
-                            <li><a href="women.php">Women’s</a></li>
-                            <li><a href="men.php">Men’s</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="login.php">Login</a>
-                            <a href="register.php">Register</a>
+                            
                         </div>
                         <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -223,7 +204,7 @@ if($stmt->num_rows == 1)
             <div class="col-lg-4 col-md-6 col-sm-7">
                 <div class="footer__about">
                     <div class="footer__logo">
-                        <a href="./index.html"><img src="img/logo1.png" alt=""></a>
+                        <a href="./index.php"><img src="img/logo1.png" alt=""></a>
                     </div>
                     <p>Your ultimate destination for fashion and lifestyle, being host to a wide array of merchandise.</p>
                     <div class="footer__payment">
@@ -237,27 +218,9 @@ if($stmt->num_rows == 1)
             </div>
             <div class="col-lg-2 col-md-3 col-sm-5">
                 <div class="footer__widget">
-                    <h6>Quick links</h6>
-                    <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blogs</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
+                    
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-4">
-                <div class="footer__widget">
-                    <h6>Account</h6>
-                    <ul>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Orders Tracking</a></li>
-                        <li><a href="#">Checkout</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                    </ul>
-                </div>
-            </div>
-
+        </div>
     </div>
 </footer>
 <!-- Footer Section End -->
